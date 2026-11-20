@@ -150,7 +150,10 @@ export function createLiveSpeech(track: MediaStreamTrack, initialVolume: number,
             if (signal.aborted || !ar) return;
             history = recentSegments(history, { sv: text, ar });
             callbacks.translated(history);
-            if (volume > 0) queue.enqueue(ar);
+            if (volume > 0) {
+              if (arabicVoices().length) queue.enqueue(ar);
+              else callbacks.progress('No Arabic speech voice is available. Live Arabic subtitles remain enabled.');
+            }
           }).catch(() => fail('The browser could not translate this segment. Restart live dubbing to retry.'));
         }
       };

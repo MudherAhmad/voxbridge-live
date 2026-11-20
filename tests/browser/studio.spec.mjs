@@ -111,11 +111,11 @@ test('live capture wires finalized tab speech to Arabic captions, voice and duck
     };
     Object.defineProperty(window, 'SpeechRecognition', { value: Recognition });
     Object.defineProperty(window, 'SpeechSynthesisUtterance', { value: class { constructor(text) { this.text = text; } } });
-    Object.defineProperty(window, 'speechSynthesis', { value: {
-      getVoices() { return [{ lang: 'ar-SA', voiceURI: 'default-ar', name: 'Default Arabic' }, { lang: 'ar-IQ', voiceURI: 'other-ar', name: 'Alternate Arabic' }]; },
+    Object.defineProperty(window, 'speechSynthesis', { value: Object.assign(new EventTarget(), {
+      getVoices() { return window.noArabicVoices ? [] : [{ lang: 'ar-SA', voiceURI: 'default-ar', name: 'Default Arabic' }, { lang: 'ar-IQ', voiceURI: 'other-ar', name: 'Alternate Arabic' }]; },
       speak(utterance) { window.spoken = utterance; },
       cancel() { window.voiceCancelled = true; },
-    } });
+    }) });
   });
   await page.goto('/');
   await page.getByRole('button', { name: 'Capture tab audio' }).click();
@@ -147,6 +147,23 @@ test('live capture wires finalized tab speech to Arabic captions, voice and duck
   await page.getByRole('checkbox', { name: 'Arabic voice' }).uncheck();
   await expect(page.locator('.mix-level')).toContainText('40%');
   expect(await page.evaluate(() => window.voiceCancelled)).toBe(true);
+  await expect(page.getByText('Arabic subtitles only', { exact: true })).toBeVisible();
+  await page.evaluate(() => {
+    window.noArabicVoices = true;
+    window.spoken = undefined;
+    window.speechSynthesis.dispatchEvent(new Event('voiceschanged'));
+  });
+  await page.getByRole('checkbox', { name: 'Arabic voice' }).check();
+  await page.evaluate(() => window.recognizer.onresult({
+    resultIndex: 0,
+    results: [{ isFinal: true, 0: { transcript: 'Sista meningen' } }],
+  }));
+  await expect(page.getByText('Arabic voice unavailable', { exact: true })).toBeVisible();
+  await expect(page.locator('p[lang="sv"]')).toHaveText('Sista meningen');
+  await expect(page.locator('p[lang="ar"]')).toHaveText('\u0623\u0645\u0631 \u0627\u0644\u0639\u0645\u0644');
+  await expect(page.locator('.status')).toContainText('No Arabic speech voice is available.');
+  await expect(page.locator('.mix-level strong')).toHaveText('40%');
+  expect(await page.evaluate(() => window.spoken)).toBeUndefined();
   await page.getByRole('button', { name: 'Stop capture' }).click();
   expect(await page.evaluate(() => [window.recognitionAborted, window.translatorDestroyed, window.testTrack.readyState])).toEqual([true, true, 'ended']);
 });

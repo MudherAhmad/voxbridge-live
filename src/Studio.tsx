@@ -284,6 +284,11 @@ export function Studio() {
   const dubWave = useMemo(() => sequentialPeaks(dubStyle === 'original' ? sample.peaks.dub : voicePeaks.dub[dubStyle], 'dub'), [dubStyle]);
   const line = sample.lines[sampleFrame.segment];
   const dubEnabled = voice && arabic > 0;
+  const liveArabicStatus = !liveEnabled ? 'Live dubbing idle'
+    : liveSpeaking ? 'Arabic voice playing'
+    : !dubEnabled ? 'Arabic subtitles only'
+    : !liveVoices.length ? 'Arabic voice unavailable'
+    : 'Arabic voice ready';
   const ducking = capturing && canDuck && liveSpeaking;
   const mix = original / 100 * (ducking ? 1 - duck / 100 : 1);
   const state = capturing ? 'Receiving audio' : playing ? 'Playing sample' : opening ? 'Waiting for tab' : loading ? 'Loading sample' : paused ? 'Paused' : 'Ready';
@@ -330,7 +335,7 @@ export function Studio() {
               </div>
               <div className={'lane dub' + ((capturing ? liveSpeaking : sampleFrame.dubActive && dubEnabled) ? ' on-air' : '')}>
                 <div className="lane-label"><strong>Arabic</strong><small>02 / Dub</small></div>
-                <div className="signal">{sharing ? <span className="muted">{liveSpeaking ? 'Arabic voice playing' : liveEnabled ? 'Waiting for Swedish speech' : 'Live dubbing idle'}</span> : <Wave peaks={dubWave} progress={progress} />}</div>
+                <div className="signal">{sharing ? <span className="muted">{liveArabicStatus}</span> : <Wave peaks={dubWave} progress={progress} />}</div>
               </div>
             </div>
           </div>
