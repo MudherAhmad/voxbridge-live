@@ -32,7 +32,7 @@ The built-in sample plays each complete Swedish sentence followed by its Arabic 
 
 - The website, source code, license, instructions, root `.kiro` materials, and downloadable demo are available.
 - The Kiro tooling statement is pending a documented development session. The repository contains specs, steering, and a save hook configuration prepared for that session.
-- The bundled sample and desktop tab capture are verified workflows. End-to-end live Swedish-to-Arabic voice output has yet to be verified with real browser services.
+- The bundled sample, desktop tab capture, and live Swedish-to-Arabic voice output have been verified. The live test used desktop Chrome on Windows with the Microsoft Naayf Arabic voice installed. Devices without an Arabic browser voice show live Arabic subtitles.
 - The public YouTube upload and formal Devpost submission are pending. The entry deadline is **December 4, 2026 at 23:00 Sweden time**. The entrant or team representative confirms the entry details and declarations.
 
 [Official Kiroween rules](https://kiroween.devpost.com/rules)

@@ -111,6 +111,7 @@ test('live capture wires finalized tab speech to Arabic captions, voice and duck
     };
     Object.defineProperty(window, 'SpeechRecognition', { value: Recognition });
     Object.defineProperty(window, 'SpeechSynthesisUtterance', { value: class { constructor(text) { this.text = text; } } });
+    window.noArabicVoices = true;
     Object.defineProperty(window, 'speechSynthesis', { value: Object.assign(new EventTarget(), {
       getVoices() { return window.noArabicVoices ? [] : [{ lang: 'ar-SA', voiceURI: 'default-ar', name: 'Default Arabic' }, { lang: 'ar-IQ', voiceURI: 'other-ar', name: 'Alternate Arabic' }]; },
       speak(utterance) { window.spoken = utterance; },
@@ -120,8 +121,10 @@ test('live capture wires finalized tab speech to Arabic captions, voice and duck
   await page.goto('/');
   await page.getByRole('button', { name: 'Capture tab audio' }).click();
   await expect(page.locator('.status')).toContainText('may process audio online');
+  await page.evaluate(() => { window.noArabicVoices = false; });
   await page.getByRole('button', { name: 'Enable live dubbing' }).click();
   await expect(page.locator('.status')).toContainText('Listening to the shared tab');
+  await expect(page.getByText('Arabic voice ready', { exact: true })).toBeVisible();
   expect(await page.evaluate(() => ({
     track: window.usedSharedTrack,
     pair: window.languagePair,

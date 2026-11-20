@@ -34,7 +34,7 @@ npm run build
 
 The automated tests cover sample playback and timeline, live queue ordering and cancellation, and the three-segment history limit. Chrome integration tests inject controlled speech, translation and synthesis providers to verify live caption rendering and ducking. A separate Chrome test shares a real browser tab and checks for incoming waveform energy. Desktop, Arabic playback and mobile screenshots are stored under `test-results/`.
 
-The built-in Translator API translates single finalized recognition segments. It has no prompt or context parameter. The session holds the last three translated pairs in memory. Browser voices vary, and the browser-native voice path has not been established as equivalent to neural TTS. A contest release still needs an end-to-end provider verification with a real Arabic voice. On the initial Chrome 157 headless probe the Swedish-to-Arabic model was reported as downloadable but never finished initializing during the 42-second observation, and no Arabic synthesis voice was enumerated.
+The built-in Translator API translates finalized recognition segments and has no prompt or context parameter. The session holds the last three translated pairs in memory. In a production test on desktop Chrome for Windows, VoxBridge captured a Swedish sentence from another tab, rendered its Arabic translation, and completed playback of that text using the installed Microsoft Naayf voice. Let the translation model finish preparing before starting the source audio. If Chrome has no Arabic voice, the studio displays live Arabic subtitles and identifies the unavailable voice in the Arabic track.
 
 ## Design and provenance
 

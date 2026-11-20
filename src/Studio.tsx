@@ -70,6 +70,7 @@ export function Studio() {
   useEffect(() => {
     const update = () => setLiveVoices(arabicVoices());
     window.speechSynthesis?.addEventListener?.("voiceschanged", update);
+    update();
     return () => window.speechSynthesis?.removeEventListener?.("voiceschanged", update);
   }, []);
 
@@ -227,6 +228,7 @@ export function Studio() {
   function enableLiveDubbing() {
     const audio = capturedAudio.current;
     if (!audio || liveSpeech.current) return;
+    setLiveVoices(arabicVoices());
     const settings = controls.current;
     const session = createLiveSpeech(audio.track, settings.voice ? settings.arabic / 100 : 0, {
       progress: setStatus,
