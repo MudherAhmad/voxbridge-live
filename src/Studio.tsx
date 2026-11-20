@@ -14,6 +14,7 @@ import voicePeaks from './audio/voices/peaks.json';
 const duration = sampleDuration;
 const sampleRates = [0.75, 0.9, 1, 1.1, 1.25, 1.5];
 const sampleChannels = [{ id: 'source', language: 'Swedish' }, { id: 'dub', language: 'Arabic' }] as const;
+const liveVoiceBars = Array.from({ length: 40 }, (_, index) => <i key={index} />);
 const nativeLiveAvailable = liveSpeechSupport();
 const mobileBrowser = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
   (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
@@ -290,6 +291,7 @@ export function Studio() {
     : liveSpeaking ? 'Arabic voice playing'
     : !dubEnabled ? 'Arabic subtitles only'
     : !liveVoices.length ? 'Arabic voice unavailable'
+    : translatedLine ? 'Arabic voice between phrases'
     : 'Arabic voice ready';
   const ducking = capturing && canDuck && liveSpeaking;
   const mix = original / 100 * (ducking ? 1 - duck / 100 : 1);
@@ -341,8 +343,8 @@ export function Studio() {
                   {capturing && nativeLiveAvailable && !liveEnabled
                     ? <button type="button" className="primary" onClick={enableLiveDubbing} aria-describedby="capture-status">Enable live dubbing</button>
                     : <>
-                      <span className="live-voice-meter" aria-hidden="true"><i /><i /><i /><i /><i /></span>
                       <span className="muted">{liveArabicStatus}</span>
+                      <span className="live-voice-meter" aria-hidden="true">{liveVoiceBars}</span>
                     </>}
                 </div> : <Wave peaks={dubWave} progress={progress} />}</div>
               </div>

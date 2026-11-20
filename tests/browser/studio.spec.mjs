@@ -144,6 +144,9 @@ test('live capture wires finalized tab speech to Arabic captions, voice and duck
   await page.evaluate(() => window.spoken.onstart());
   await expect(page.locator('.lane.dub')).toHaveClass(/on-air/);
   await expect(page.getByText('Arabic voice playing', { exact: true })).toBeVisible();
+  const liveMeter = page.locator('.live-voice-meter');
+  await expect(liveMeter).toBeVisible();
+  expect(await liveMeter.evaluate(meter => meter.clientWidth / meter.closest('.signal').clientWidth)).toBeGreaterThan(0.8);
   await expect(page.locator('.mix-level strong')).toHaveText('4%');
   await page.getByRole('combobox', { name: 'Live Arabic voice' }).selectOption('other-ar');
   expect(await page.evaluate(() => window.spoken.voice.voiceURI)).toBe('default-ar');
@@ -152,6 +155,7 @@ test('live capture wires finalized tab speech to Arabic captions, voice and duck
     window.recognizer.onresult({ resultIndex: 0, results: [{ isFinal: true, 0: { transcript: 'Nästa mening' } }] });
   });
   await expect.poll(() => page.evaluate(() => window.spoken.voice.voiceURI)).toBe('other-ar');
+  await expect(page.getByText('Arabic voice between phrases', { exact: true })).toBeVisible();
   await page.evaluate(() => window.spoken.onstart());
   await page.getByRole('checkbox', { name: 'Arabic voice' }).uncheck();
   await expect(page.locator('.mix-level')).toContainText('40%');
