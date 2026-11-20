@@ -19,13 +19,13 @@ The built-in sample plays each complete Swedish sentence followed by its Arabic 
 1. Open the application and select **Play workshop sample**. Follow the playhead as it moves between Swedish and Arabic.
 2. Try **Arabic only** or **Swedish only**, then use **Audio tuning** to compare voices and set a separate speed for each track.
 3. Pause and resume playback to verify that the playhead continues from the same position.
-4. For live capture on desktop Chrome, open a second tab with a Swedish clip, select **Capture tab audio** in VoxBridge, then share the source tab with its audio. Select **Enable live dubbing** in the Arabic track and wait for the listening status before playing the clip. The Swedish waveform shows incoming audio. The Arabic indicator moves while an installed Arabic browser voice is speaking.
+4. For live capture on desktop Chrome, open a second tab with a Swedish video. The [Swedish workshop clip from the demo](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final/Workshop-Briefing-SV.mp4) is available as a test source. Select **Capture tab audio** in VoxBridge, then share the source tab with its audio. Select **Enable live dubbing** in the Arabic track and wait for the listening status before playing the clip. The Swedish waveform shows incoming audio. The Arabic indicator moves while an installed Arabic browser voice is speaking.
 
 ## Video upload copy
 
-- [Download the 46-second MP4 with English captions](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-demo/VoxBridge-Kiroween-Demo-EN.mp4)
+- [Download the final MP4 with English captions](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final/VoxBridge-Kiroween-Final.mp4)
 - YouTube title: VoxBridge Live | Swedish-to-Arabic Workshop Dubbing | Kiroween 2026
-- YouTube description: Watch a Swedish workshop briefing and its Arabic dub run on a shared timeline. The demo shows the bundled bilingual sample, independent speed and voice controls, and desktop Chrome receiving a shared tab's audio. Try it at https://voxbridge-live.vercel.app/ and see the source at https://github.com/MudherAhmad/voxbridge-live.
+- YouTube description: Play the built-in workshop sample, then watch VoxBridge share a Swedish video tab, translate two phrases while it plays, and speak them in Arabic. The live recording uses Chrome on Windows with Microsoft Naayf. Try it at https://voxbridge-live.vercel.app/ and see the source at https://github.com/MudherAhmad/voxbridge-live.
 - Visibility: Public. Add the resulting YouTube link to the Devpost form.
 
 ## Submission status

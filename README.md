@@ -2,9 +2,11 @@
 
 A browser-based dubbing studio for multilingual workshops. The first supported product scenario is a Swedish workshop briefing with Arabic captions and audio.
 
-[Open VoxBridge Live](https://voxbridge-live.vercel.app/) · [Download the 46-second demo](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-demo/VoxBridge-Kiroween-Demo-EN.mp4) · [Kiroween submission materials](SUBMISSION.md)
+[Open VoxBridge Live](https://voxbridge-live.vercel.app/) · [Download the final demo](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final/VoxBridge-Kiroween-Final.mp4) · [Kiroween submission materials](SUBMISSION.md)
 
 Try the sample on desktop or mobile. Live tab capture targets desktop Chrome.
+
+The final demo opens the studio and plays the built-in sample first. It then shares a separate tab playing [the Swedish workshop clip](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final/Workshop-Briefing-SV.mp4). The recording includes the Arabic captions and the live Microsoft Naayf audio generated for two Swedish phrases, with an English translation on screen.
 
 ## Run locally
 
