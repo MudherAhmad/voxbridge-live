@@ -1,20 +1,38 @@
 # Kiroween submission materials
 
-## Project description
+## Devpost project fields
 
-VoxBridge Live is a dubbing studio for multilingual workshops. The Swedish-to-Arabic workshop sample plays each complete sentence followed by its Arabic translation, with bilingual captions, separate audio levels and speeds, and selectable voices. The sample is bundled and can be tested on phones without an account. Sharing another browser tab's audio is a separate desktop Chrome workflow. The capture uses browsers' sharing controls, and live recognition, translation and voice depend on the browser's services.
-
+- Project name: VoxBridge Live
+- Tagline: A Swedish-to-Arabic dubbing studio for workshop briefings.
 - Category: Frankenstein
 - Application: https://voxbridge-live.vercel.app/
 - Source: https://github.com/MudherAhmad/voxbridge-live
-- Test instructions: Open the application and choose **Play workshop sample**. Use **Audio tuning** to compare voices or set different speeds. Pause and resume to verify that playback continues from the same position. Use desktop Chrome to try **Capture tab audio** with a tab you have permission to share.
+
+### Project description
+
+A morning workshop briefing can contain details you need to hear the first time. VoxBridge Live puts a Swedish briefing and its Arabic dub on one timeline so viewers can follow the handoff between languages and read the technical terms in both captions.
+
+The built-in sample plays each complete Swedish sentence followed by its Arabic translation. Listeners can isolate either track, change each track's speed and level, switch voices, and pause and resume at the same point. The sample works on desktop and mobile without an account. On desktop Chrome, VoxBridge can also receive audio from another browser tab with the user's permission. Live recognition, translation and narration depend on the browser's services.
+
+### Testing instructions
+
+1. Open the application and select **Play workshop sample**. Follow the playhead as it moves between Swedish and Arabic.
+2. Try **Arabic only** or **Swedish only**, then use **Audio tuning** to compare voices and set a separate speed for each track.
+3. Pause and resume playback to verify that the playhead continues from the same position.
+4. For live capture on desktop Chrome, open a second tab with a Swedish clip, select **Capture tab audio** in VoxBridge, then select the source tab and enable **Share tab audio**. Check that incoming audio appears on the Swedish waveform.
+
+## Video upload copy
+
+- [Download the 46-second MP4 with English captions](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-demo/VoxBridge-Kiroween-Demo-EN.mp4)
+- YouTube title: VoxBridge Live | Swedish-to-Arabic Workshop Dubbing | Kiroween 2026
+- YouTube description: Watch a Swedish workshop briefing and its Arabic dub run on a shared timeline. The demo shows the bundled bilingual sample, independent speed and voice controls, and desktop Chrome receiving a shared tab's audio. Try it at https://voxbridge-live.vercel.app/ and see the source at https://github.com/MudherAhmad/voxbridge-live.
+- Visibility: Public. Add the resulting YouTube link to the Devpost form.
 
 ## Submission status
 
-- The website, source code, license, instructions, and root `.kiro` materials are intended to accompany the submission.
-- Demo footage must be publicly visible on YouTube. Use the finished MP4 accompanying these materials and add its public URL to the Devpost form.
-- Record actual Kiro-assisted implementation and evidence of any Kiro hook runs before completing the tooling statement. The repository documents prepared specs, steering, and hook configuration. It does not by itself establish that Kiro ran them.
-- The bundled playback demo is prerecorded. Native live tab capture has been tested separately. Confirm the Swedish-to-Arabic live speech-to-voice flow on the intended judge environment before claiming that it works end-to-end.
-- Submit in the organizer's portal by **December 4, 2026 at 23:00 Sweden time**. Confirm entrant, author, and contest declarations in Devpost.
+- The website, source code, license, instructions, root `.kiro` materials, and downloadable demo are available.
+- The Kiro tooling statement is pending a documented development session. The repository contains specs, steering, and a save hook configuration prepared for that session.
+- The bundled sample and desktop tab capture are verified workflows. End-to-end live Swedish-to-Arabic voice output has yet to be verified with real browser services.
+- The public YouTube upload and formal Devpost submission are pending. The entry deadline is **December 4, 2026 at 23:00 Sweden time**. The entrant or team representative confirms the entry details and declarations.
 
 [Official Kiroween rules](https://kiroween.devpost.com/rules)
