@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Check audio timeline",
+      "description": "Verify playback scheduling and ducking when Kiro saves studio code.",
+      "trigger": "PostFileSave",
+      "matcher": "(^|[\\\\/])(src|tests)[\\\\/].*\\.(ts|tsx|mjs)$",
+      "action": {
+        "type": "command",
+        "command": "npm test"
+      }
+    }
+  ]
+}

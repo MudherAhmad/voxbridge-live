@@ -1,0 +1,25 @@
+{
+  "name": "voxbridge-live",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "node --test --test-isolation=none tests/*.test.mjs",
+    "typecheck": "tsc --noEmit",
+    "test:browser": "playwright test"
+  },
+  "dependencies": {
+    "react": "^19",
+    "react-dom": "^19"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "fast-check": "^4.10.3",
+    "typescript": "^5",
+    "vite": "^7"
+  }
+}
