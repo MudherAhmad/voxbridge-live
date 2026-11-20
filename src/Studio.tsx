@@ -337,11 +337,17 @@ export function Studio() {
               </div>
               <div className={'lane dub' + ((capturing ? liveSpeaking : sampleFrame.dubActive && dubEnabled) ? ' on-air' : '')}>
                 <div className="lane-label"><strong>Arabic</strong><small>02 / Dub</small></div>
-                <div className="signal">{sharing ? <span className="muted">{liveArabicStatus}</span> : <Wave peaks={dubWave} progress={progress} />}</div>
+                <div className="signal">{sharing ? <div className="live-dub-signal">
+                  {capturing && nativeLiveAvailable && !liveEnabled
+                    ? <button type="button" className="primary" onClick={enableLiveDubbing} aria-describedby="capture-status">Enable live dubbing</button>
+                    : <>
+                      <span className="live-voice-meter" aria-hidden="true"><i /><i /><i /><i /><i /></span>
+                      <span className="muted">{liveArabicStatus}</span>
+                    </>}
+                </div> : <Wave peaks={dubWave} progress={progress} />}</div>
               </div>
             </div>
           </div>
-          {capturing && nativeLiveAvailable && !liveEnabled && <div className="live-start"><button type="button" className="primary" onClick={enableLiveDubbing}>Enable live dubbing</button></div>}
           {!opening && <div className="mix">
             {(!capturing || canDuck && liveEnabled) && <div className="mix-presets" role="group" aria-label="Listening mode">
               <button type="button" aria-pressed={original === defaultMix.original && arabic === defaultMix.arabic && voice}
@@ -390,7 +396,7 @@ export function Studio() {
               </div>
             </details>
           </div>}
-          <div className="status" role="status">{status}</div>
+          <div id="capture-status" className="status" role="status">{status}</div>
         </section>
 
         <section className="captions" aria-label="Bilingual captions">

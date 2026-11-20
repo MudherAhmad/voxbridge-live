@@ -95,7 +95,18 @@ mark { background: transparent; color: var(--accent); font-weight: 720; }
 @media (max-width: 680px) { .shell { width: calc(100% - 1.6rem); } .studio-head { align-items: flex-start; flex-direction: column; } }
 @media (max-width: 520px) { :root { --rail: 5.8rem; } .top { min-height: 3.4rem; } .studio-head, .status, .mix { padding-inline: .7rem; } .actions { display: grid; grid-template-columns: 1.18fr 1fr; width: 100%; gap: .4rem; } .actions button { padding-inline: .35rem; font-size: .78rem; } .timeline { margin-inline: .7rem; } .mix { gap: .7rem; } .mix-presets button { flex: 1; padding-inline: .25rem; } .sample-options { grid-template-columns: 1fr; } .mix-level { margin-left: 0; } .captions { grid-template-columns: 1fr; } .clock small { display: none; } .wave { gap: 0; } .wave i:nth-child(even) { visibility: hidden; } }
 
-.live-start { padding: .75rem 1.2rem; }
+.live-dub-signal { display: flex; align-items: center; gap: .65rem; padding: .55rem .7rem; }
+.live-dub-signal .muted { padding-left: 0; }
+.live-voice-meter { display: flex; align-items: center; gap: 3px; height: 1.45rem; color: var(--accent); opacity: .35; }
+.live-voice-meter i { width: 3px; height: 100%; background: currentColor; border-radius: 2px; transform: scaleY(.18); }
+.lane.on-air .live-voice-meter { opacity: 1; }
+.lane.on-air .live-voice-meter i { transform: scaleY(.65); }
+@media (prefers-reduced-motion: no-preference) {
+  .lane.on-air .live-voice-meter i { animation: live-voice-pulse .62s ease-in-out infinite alternate; }
+  .lane.on-air .live-voice-meter i:nth-child(2n) { animation-delay: -.3s; }
+  .lane.on-air .live-voice-meter i:nth-child(3n) { animation-delay: -.45s; }
+}
+@keyframes live-voice-pulse { from { transform: scaleY(.22); } to { transform: scaleY(1); } }
 
 @media (min-width: 521px) { .actions { display: grid; grid-template-columns: 13.5rem 10rem; } .actions button { white-space: nowrap; } }
 .studio-context { display: grid; grid-template-columns: minmax(0, 10rem) 7rem max-content; }

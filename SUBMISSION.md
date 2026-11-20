@@ -19,7 +19,7 @@ The built-in sample plays each complete Swedish sentence followed by its Arabic 
 1. Open the application and select **Play workshop sample**. Follow the playhead as it moves between Swedish and Arabic.
 2. Try **Arabic only** or **Swedish only**, then use **Audio tuning** to compare voices and set a separate speed for each track.
 3. Pause and resume playback to verify that the playhead continues from the same position.
-4. For live capture on desktop Chrome, open a second tab with a Swedish clip, select **Capture tab audio** in VoxBridge, then select the source tab and enable **Share tab audio**. Check that incoming audio appears on the Swedish waveform.
+4. For live capture on desktop Chrome, open a second tab with a Swedish clip, select **Capture tab audio** in VoxBridge, then share the source tab with its audio. Select **Enable live dubbing** in the Arabic track and wait for the listening status before playing the clip. The Swedish waveform shows incoming audio. The Arabic indicator moves while an installed Arabic browser voice is speaking.
 
 ## Video upload copy
 

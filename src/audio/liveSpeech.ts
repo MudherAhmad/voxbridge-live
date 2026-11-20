@@ -24,7 +24,7 @@ export function arabicVoices() {
   return window.speechSynthesis?.getVoices().filter(voice => /^ar(?:-|$)/i.test(voice.lang)) ?? [];
 }
 
-function speakArabic(text: string, rate: number, signal: AbortSignal, volume: number, voiceURI: string): Promise<void> {
+function speakArabic(text: string, rate: number, signal: AbortSignal, volume: number, voiceURI: string, onStart: () => void): Promise<void> {
   return new Promise((resolve, reject) => {
     const synth = window.speechSynthesis;
     const voices = arabicVoices();
@@ -43,12 +43,14 @@ function speakArabic(text: string, rate: number, signal: AbortSignal, volume: nu
     function finish(error?: Error, interrupt = false) {
       clearTimeout(timer);
       signal.removeEventListener('abort', cancel);
+      utterance.onstart = null;
       utterance.onend = null;
       utterance.onerror = null;
       if (interrupt) synth.cancel();
       if (error) reject(error);
       else resolve();
     }
+    utterance.onstart = onStart;
     utterance.onend = () => finish();
     utterance.onerror = () => finish(Error('Arabic voice could not play. Live subtitles remain enabled.'));
     signal.addEventListener('abort', cancel, { once: true });
@@ -82,7 +84,7 @@ export function createLiveSpeech(track: MediaStreamTrack, initialVolume: number,
   let chain = Promise.resolve();
   let volume = initialVolume;
   let voiceURI = "";
-  const queue = createDubbingQueue((text, rate, signal) => speakArabic(text, rate, signal, volume, voiceURI), callbacks.speaking, error => {
+  const queue = createDubbingQueue((text, rate, signal, onStart) => speakArabic(text, rate, signal, volume, voiceURI, onStart), callbacks.speaking, error => {
     callbacks.progress(error instanceof Error ? error.message : 'Arabic voice failed. Live subtitles remain enabled.');
   });
 

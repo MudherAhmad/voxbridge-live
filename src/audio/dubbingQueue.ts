@@ -1,4 +1,4 @@
-type Speak = (text: string, rate: number, signal: AbortSignal) => Promise<void>;
+type Speak = (text: string, rate: number, signal: AbortSignal, onStart: () => void) => Promise<void>;
 
 export function createDubbingQueue(speak: Speak, onSpeaking: (speaking: boolean) => void, onError: (error: unknown) => void) {
   const pending: string[] = [];
@@ -13,9 +13,10 @@ export function createDubbingQueue(speak: Speak, onSpeaking: (speaking: boolean)
       const text = pending.shift()!;
       const current = new AbortController();
       active = current;
-      onSpeaking(true);
       try {
-        await speak(text, rate, current.signal);
+        await speak(text, rate, current.signal, () => {
+          if (!current.signal.aborted) onSpeaking(true);
+        });
       } catch (error) {
         if (!current.signal.aborted) onError(error);
       } finally {

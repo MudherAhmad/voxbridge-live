@@ -40,8 +40,9 @@ test('dub playback is serial and accelerates when three or more are waiting', as
 test('switching to captions cancels active audio and discards pending speech', async () => {
   const actuallySpoken = [];
   const states = [];
-  const queue = createDubbingQueue((text, _, signal) => {
+  const queue = createDubbingQueue((text, _, signal, onStart) => {
     actuallySpoken.push(text);
+    onStart();
     return new Promise(resolve => signal.addEventListener('abort', resolve, { once: true }));
   }, speaking => states.push(speaking), assert.fail);
   queue.enqueue('first');

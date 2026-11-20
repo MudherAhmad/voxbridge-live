@@ -122,7 +122,7 @@ test('live capture wires finalized tab speech to Arabic captions, voice and duck
   await page.getByRole('button', { name: 'Capture tab audio' }).click();
   await expect(page.locator('.status')).toContainText('may process audio online');
   await page.evaluate(() => { window.noArabicVoices = false; });
-  await page.getByRole('button', { name: 'Enable live dubbing' }).click();
+  await page.locator('.lane.dub').getByRole('button', { name: 'Enable live dubbing' }).click();
   await expect(page.locator('.status')).toContainText('Listening to the shared tab');
   await expect(page.getByText('Arabic voice ready', { exact: true })).toBeVisible();
   expect(await page.evaluate(() => ({
@@ -139,6 +139,11 @@ test('live capture wires finalized tab speech to Arabic captions, voice and duck
   await expect(page.locator('p[lang="sv"]')).toHaveText('Arbetsordern');
   await expect(page.locator('p[lang="ar"]')).toHaveText('\u0623\u0645\u0631 \u0627\u0644\u0639\u0645\u0644');
   expect(await page.evaluate(() => window.spoken.text)).toBe('\u0623\u0645\u0631 \u0627\u0644\u0639\u0645\u0644');
+  await expect(page.locator('.mix-level strong')).toHaveText('40%');
+  await expect(page.locator('.lane.dub')).not.toHaveClass(/on-air/);
+  await page.evaluate(() => window.spoken.onstart());
+  await expect(page.locator('.lane.dub')).toHaveClass(/on-air/);
+  await expect(page.getByText('Arabic voice playing', { exact: true })).toBeVisible();
   await expect(page.locator('.mix-level strong')).toHaveText('4%');
   await page.getByRole('combobox', { name: 'Live Arabic voice' }).selectOption('other-ar');
   expect(await page.evaluate(() => window.spoken.voice.voiceURI)).toBe('default-ar');
@@ -147,6 +152,7 @@ test('live capture wires finalized tab speech to Arabic captions, voice and duck
     window.recognizer.onresult({ resultIndex: 0, results: [{ isFinal: true, 0: { transcript: 'Nästa mening' } }] });
   });
   await expect.poll(() => page.evaluate(() => window.spoken.voice.voiceURI)).toBe('other-ar');
+  await page.evaluate(() => window.spoken.onstart());
   await page.getByRole('checkbox', { name: 'Arabic voice' }).uncheck();
   await expect(page.locator('.mix-level')).toContainText('40%');
   expect(await page.evaluate(() => window.voiceCancelled)).toBe(true);
