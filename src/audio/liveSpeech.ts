@@ -19,6 +19,7 @@ type Browser = Window & {
 };
 
 const browser = window as Browser;
+const missingArabicVoice = 'No Arabic speech voice is available. Live Arabic subtitles remain enabled. Install an Arabic text-to-speech voice and reopen Chrome to hear the dub.';
 
 export function arabicVoices() {
   return window.speechSynthesis?.getVoices().filter(voice => /^ar(?:-|$)/i.test(voice.lang)) ?? [];
@@ -30,7 +31,7 @@ function speakArabic(text: string, rate: number, signal: AbortSignal, volume: nu
     const voices = arabicVoices();
     const voice = voices.find(item => item.voiceURI === voiceURI) ?? voices[0];
     if (!voice) {
-      reject(Error('No Arabic speech voice is available. Live Arabic subtitles remain enabled.'));
+      reject(Error(missingArabicVoice));
       return;
     }
     const utterance = new SpeechSynthesisUtterance(text);
@@ -154,7 +155,7 @@ export function createLiveSpeech(track: MediaStreamTrack, initialVolume: number,
             callbacks.translated(history);
             if (volume > 0) {
               if (arabicVoices().length) queue.enqueue(ar);
-              else callbacks.progress('No Arabic speech voice is available. Live Arabic subtitles remain enabled.');
+              else callbacks.progress(missingArabicVoice);
             }
           }).catch(() => fail('The browser could not translate this segment. Restart live dubbing to retry.'));
         }

@@ -175,6 +175,7 @@ test('live capture wires finalized tab speech to Arabic captions, voice and duck
   await expect(page.locator('p[lang="sv"]')).toHaveText('Sista meningen');
   await expect(page.locator('p[lang="ar"]')).toHaveText('\u0623\u0645\u0631 \u0627\u0644\u0639\u0645\u0644');
   await expect(page.locator('.status')).toContainText('No Arabic speech voice is available.');
+  await expect(page.locator('.status')).toContainText('Install an Arabic text-to-speech voice and reopen Chrome');
   await expect(page.locator('.mix-level strong')).toHaveText('40%');
   expect(await page.evaluate(() => window.spoken)).toBeUndefined();
   await page.getByRole('button', { name: 'Stop capture' }).click();
