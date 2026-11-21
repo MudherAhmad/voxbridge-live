@@ -17,6 +17,7 @@ Reviewed November 21, 2026 in Sweden. This report records evidence for a new rev
 | Live capture | A recorded production Chrome session on Windows shared a second tab and produced visible Arabic captions and audible Arabic on two phrases using Microsoft Naayf. In a separate Edge profile on the same computer, sample playback, pause/resume, and the native share picker worked. Edge's translation model did not prepare before the 30-second test timeout. A second physical computer and sustained live latency were outside the verified evidence. |
 | Missing Arabic voice | Found that `Arabic only` could mute the original when no Arabic voice was available. The mode is now disabled in that state. The browser test injects deterministic language providers and verifies translated captions, missing-voice guidance, and source volume at the balanced level. The film labels this scene as a fallback test. |
 | GitHub | Public access and MIT SPDX metadata verified. The five tracked Kiro files are at the root under `.kiro/` and are included in Git. License, README, submission materials, source and tests are present. No environment or credentials files with the checked names appeared in the tracked tree. This was a file inventory, with no claim of a full secret-history scan. |
+| Updated production | Verified the public URL after publishing the missing-voice fix. The HTML, JavaScript, CSS, and ten WAV files each returned HTTP 200 and matched the updated local build by SHA-256 (13/13). |
 
 ## What the product delivers
 
