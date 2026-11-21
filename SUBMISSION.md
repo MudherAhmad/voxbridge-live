@@ -3,20 +3,20 @@
 ## Devpost project fields
 
 - Project name: VoxBridge Live
-- Tagline: Hear a Swedish workshop briefing, follow it in Arabic, and check the terms that matter.
+- Tagline: Hear a Swedish workshop briefing in Arabic and check the terms you need on the job.
 - Category: Frankenstein
 - Application: https://voxbridge-live.vercel.app/
 - Source: https://github.com/MudherAhmad/voxbridge-live
 
 ### Project description
 
-In a Swedish workshop, the morning briefing names the first job and where the customer is waiting. VoxBridge Live helps an Arabic-speaking technician follow those details. One studio brings together the Swedish source, Arabic captions and speech, and a small bilingual reference for terms such as *arbetsordern* and *أمر العمل*.
+VoxBridge Live helps an Arabic-speaking technician follow a Swedish morning briefing. Hear the original, follow the Arabic captions and dub, and check terms such as *arbetsordern* and *أمر العمل*.
 
-**Try the bundled briefing** on desktop or mobile with no account or API key. Each Swedish sentence finishes before its Arabic counterpart starts. Compare listening modes, change speeds independently from 0.75× to 1.50×, compare three Swedish and five Arabic playback styles, and pause and resume on one playhead. The glossary identifies the current sample cue.
+**Try it in one click.** Open [VoxBridge Live](https://voxbridge-live.vercel.app/) and select **Play workshop sample**. The sample works on desktop and mobile with no account or API key. Then try the live path on desktop Chrome by sharing the [Swedish workshop clip](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final/Workshop-Briefing-SV.mp4) with tab audio and selecting **Enable live dubbing**.
 
-**Share a live tab** on desktop Chrome. VoxBridge combines consented tab capture, Web Audio, Swedish speech recognition, on-device Chrome translation of finalized phrases, and available browser Arabic voices. A serialized queue plays the dub. When the browser supports source suppression, Web Audio lowers the Swedish mix while the Arabic voice plays. If a browser voice is unavailable, the conversation is still readable in Arabic. The curated glossary adds terms recognized in the Swedish source and keeps their first-heard order for the current share.
+**In the sample**, each Swedish sentence finishes before its Arabic counterpart starts. Compare listening modes, set each language's speed independently, switch playback styles, or pause and resume on one playhead. The glossary highlights the current cue.
 
-**Frankenstein architecture** brings together two workflows with the same interface. The portable sample uses offline-rendered WAV assets and a timed bilingual script. Live capture uses browser language APIs and an explicit consent step. The app has no server-side capture storage. Browser speech recognition may use its provider's online service.
+**The live path** combines tab capture, Web Audio, Swedish speech recognition, Chrome's on-device translation of finalized phrases, and browser voices in a serialized queue. On supported source routes, the Swedish mix lowers while Arabic plays. When an Arabic voice is unavailable, Arabic captions stay visible. The glossary lists recognized Swedish terms in first-heard order. Capture requires explicit consent, and the app stores no captured audio on a server. Browser speech recognition may use its provider's online service.
 
 **Next step** is a consented pilot with bilingual technicians or vocational learners to measure comprehension, terminology accuracy and time to the first translated caption.
 
