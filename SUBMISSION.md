@@ -34,9 +34,31 @@ We used Kiro CLI with the project's steering and spec files to turn three behavi
 ## Video upload copy
 
 - [Download the narrated submission film](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-submission/VoxBridge-Kiroween-Submission.mp4)
-- YouTube title: VoxBridge Live | Swedish-to-Arabic Workshop Dubbing | Kiroween 2026
-- YouTube description: Follow an Arabic-speaking technician through a Swedish workshop briefing. Try independent playback speeds and the bilingual glossary. Live capture visuals show real Chrome captions. The film recreates that Arabic soundtrack with Nabra-82M INT8, and labels the simulated missing-voice test separately. See how Kiro helped build the glossary and protect live recovery. Try the studio at https://voxbridge-live.vercel.app/ and see the source and media credits at https://github.com/MudherAhmad/voxbridge-live.
 - Visibility: Public. Add the resulting YouTube link to the Devpost form.
+
+### YouTube title
+
+VoxBridge Live — Kiroween 2026 Submission Demo (Swedish → Arabic Workshop Briefing)
+
+### YouTube description
+
+A practical walkthrough of VoxBridge Live, built for a Swedish-speaking workshop briefing where an Arabic-speaking technician needs clear instructions, synchronized captions/dubbing, and quick bilingual workshop terms.
+
+What’s shown in this demo:
+
+- Bundled workshop sample & independent Swedish / Arabic playback speed controls
+- Listening modes (Balanced mix, Arabic only, Swedish only) and automatic original audio ducking (40% → 4% during Arabic playback)
+- Swedish–Arabic workshop glossary appearing in order of recognized terms without duplicates (e.g., arbetsordern, receptionen)
+- Live tab audio capture flow in desktop Chrome
+- Resilience & fallback tests: missing Arabic TTS voice fallback and single-phrase translation failure recovery while keeping prior captions and continuing the session
+- Kiro workflow, steering, property tests, and PostFileSave hook verification
+
+Transparency note: Live capture and translation UI sequences are from recorded browser runs; the Arabic dubbing soundtrack in this film was regenerated with Nabra for clear presentation.
+
+- Try the app: https://voxbridge-live.vercel.app/
+- GitHub repository: https://github.com/MudherAhmad/voxbridge-live
+- Kiro log: https://github.com/MudherAhmad/voxbridge-live/blob/main/KIRO.md
+- Contest report: https://github.com/MudherAhmad/voxbridge-live/blob/main/CONTEST.md
 
 ## Submission status
 
