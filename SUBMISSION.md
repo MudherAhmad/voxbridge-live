@@ -33,7 +33,7 @@ We used Kiro CLI with the project's steering and spec files to turn three behavi
 
 ## Video upload copy
 
-- [Download the narrated submission film](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-submission/VoxBridge-Kiroween-Submission.mp4)
+- [Download the narrated submission film](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final-review/VoxBridge-Kiroween-Final-Review.mp4)
 - Visibility: Public. Add the resulting YouTube link to the Devpost form.
 
 ### YouTube title
@@ -55,7 +55,7 @@ What’s shown in this demo:
 - Resilience & fallback tests: missing Arabic TTS voice fallback and single-phrase translation failure recovery while keeping prior captions and continuing the session
 - Kiro workflow, steering, property tests, and PostFileSave hook verification
 
-Transparency note: Live capture and translation UI sequences are from recorded browser runs; the Arabic dubbing soundtrack in this film was regenerated with Nabra for clear presentation.
+Transparency note: Live capture and translation UI sequences are from recorded browser runs; the Arabic dubbing soundtrack in this film was regenerated with Nabra-82M INT8 for clear presentation.
 
 - GitHub repository: https://github.com/MudherAhmad/voxbridge-live
 - Kiro log: https://github.com/MudherAhmad/voxbridge-live/blob/main/KIRO.md
@@ -69,6 +69,6 @@ Transparency note: Live capture and translation UI sequences are from recorded b
 - A separate Edge profile on the same Windows computer played the packaged Arabic track, paused, resumed, and acquired tab audio. Its translation model timed out during setup. The supported live release target is desktop Chrome.
 - The no-voice test supplies a controlled bilingual phrase through the studio, verifies the visible recovery instruction, retains captions, disables **Arabic only**, and checks that the original audio stays at its set level.
 - The [independent review](AUDIT.md) records the source, media, test results, and remaining eligibility checks.
-- The submission film replaces the earlier system-voice soundtrack with documented Nabra synthesis. The public YouTube URL and Devpost receipt are pending. The deadline is **December 4, 2026 at 23:00 Sweden time**. The entrant or team representative confirms the entry details and declarations.
+- The submission film replaces the earlier system-voice soundtrack with documented Nabra-82M INT8 synthesis. The public YouTube URL and Devpost receipt are pending. The deadline is **December 4, 2026 at 23:00 Sweden time**. The entrant or team representative confirms the entry details and declarations.
 
 [Official Kiroween rules](https://kiroween.devpost.com/rules)

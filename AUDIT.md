@@ -4,7 +4,7 @@ Reviewed November 21, 2026 in Sweden. This report records evidence for a new rev
 
 - [Production studio](https://voxbridge-live.vercel.app/)
 - [Public repository](https://github.com/MudherAhmad/voxbridge-live)
-- [Narrated demo with the Kiro chapter](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-submission/VoxBridge-Kiroween-Submission.mp4)
+- [Narrated demo with the Kiro chapter](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final-review/VoxBridge-Kiroween-Final-Review.mp4)
 - [Kiro development and verification record](KIRO.md)
 - [Official rules](https://kiroween.devpost.com/rules)
 
@@ -33,7 +33,7 @@ The requirements and design describe the shipped Swedish-to-Arabic workflow and 
 
 ## Video and media
 
-The submission film shows real application footage and a labeled recording of a live Chrome capture. The two live-caption scenes use freshly rendered Nabra audio from the displayed Arabic text. Every live-capture audio stream in the edit is replaced by original workshop audio or newly generated narration and Arabic speech. Earlier review cuts included a recorded system voice. The missing-voice scene is labeled as a simulation. The Kiro chapter explains the implementation, regressions and executed save hook.
+The submission film shows real application footage and a labeled recording of a live Chrome capture. The two live-caption scenes use freshly rendered Nabra-82M INT8 audio from the displayed Arabic text. Every live-capture audio stream in the edit is replaced by original workshop audio or newly generated narration and Arabic speech. Earlier review cuts included a recorded system voice. The missing-voice scene is labeled as a simulation. The Kiro chapter shows excerpts from the glossary specification and matcher, the recorded save-hook output, and a controlled browser regression.
 
 The workshop script, recordings and visuals were created for this project. The Swedish sample uses [Piper NST](https://huggingface.co/rhasspy/piper-voices/blob/main/sv/sv_SE/nst/medium/MODEL_CARD), whose model card lists CC0 training data. The Arabic sample and the recreated soundtrack use [Nabra-82M INT8](https://huggingface.co/marwanelamami/nabra-82m-sherpa-onnx/tree/7fe12ea), listed as Apache-2.0 by its publisher. English narration uses [Piper LJSpeech](https://huggingface.co/rhasspy/piper-voices/blob/main/en/en_US/ljspeech/medium/MODEL_CARD), whose card identifies public-domain training data. The submission film uses no recorded system-voice audio. Source references for the optional bundled voices appear in the [README](README.md). MIT covers project code.
 

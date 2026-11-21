@@ -2,11 +2,11 @@
 
 A browser-based dubbing studio for multilingual workshops. The first supported product scenario is a Swedish workshop briefing with Arabic captions and audio.
 
-[Open VoxBridge Live](https://voxbridge-live.vercel.app/) · [Watch the submission film](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-submission/VoxBridge-Kiroween-Submission.mp4) · [How Kiro helped](KIRO.md) · [Independent review](AUDIT.md) · [Kiroween submission materials](SUBMISSION.md)
+[Open VoxBridge Live](https://voxbridge-live.vercel.app/) · [Watch the submission film](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final-review/VoxBridge-Kiroween-Final-Review.mp4) · [How Kiro helped](KIRO.md) · [Independent review](AUDIT.md) · [Kiroween submission materials](SUBMISSION.md)
 
 Try the sample on desktop or mobile. Live tab capture targets desktop Chrome.
 
-The narrated demo shows the sample, independent speeds, voice controls, bilingual glossary, tab capture, and how Kiro helped build them. A recorded Chrome session shows live captions from [the Swedish workshop clip](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final/Workshop-Briefing-SV.mp4). The film labels the recreated Nabra Arabic soundtrack and the simulated missing-voice test.
+The narrated demo shows the sample, independent speeds, voice controls, bilingual glossary, tab capture, and how Kiro helped build them. A recorded Chrome session shows live captions from [the Swedish workshop clip](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final/Workshop-Briefing-SV.mp4). The film labels the Arabic soundtrack regenerated with Nabra-82M INT8 and the simulated missing-voice test.
 
 ## Run locally
 
@@ -48,4 +48,4 @@ The workshop scenario, texts, timing and motion are specific to this project. Th
 
 See [.kiro specs](.kiro/specs/live-dub/design.md) for design choices, [How Kiro helped](KIRO.md) for development evidence, and [the task record](.kiro/specs/live-dub/tasks.md) for remaining checks.
 
-The [contest review](CONTEST.md) links the rules, prior winners, research, and submission checklist. The [offline review packet](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-submission/VoxBridge-Kiroween-Review.txt) includes the source text, test evidence, and film links.
+The [contest review](CONTEST.md) links the rules, prior winners, research, and submission checklist. The [offline review packet](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final-review/VoxBridge-Kiroween-Final-Review.txt) includes the source text, test evidence, and film links.
