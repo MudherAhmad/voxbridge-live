@@ -2,11 +2,11 @@
 
 A browser-based dubbing studio for multilingual workshops. The first supported product scenario is a Swedish workshop briefing with Arabic captions and audio.
 
-[Open VoxBridge Live](https://voxbridge-live.vercel.app/) · [Download the showcase video](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-showcase/VoxBridge-Kiroween-Showcase.mp4) · [Kiroween submission materials](SUBMISSION.md)
+[Open VoxBridge Live](https://voxbridge-live.vercel.app/) · [Download the narrated demo](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-audit/VoxBridge-Kiroween-Narrated.mp4) · [Independent review](AUDIT.md) · [Kiroween submission materials](SUBMISSION.md)
 
 Try the sample on desktop or mobile. Live tab capture targets desktop Chrome.
 
-The 78-second showcase introduces the workshop briefing, plays the built-in sample and listening controls, then shares a separate tab playing [the Swedish workshop clip](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final/Workshop-Briefing-SV.mp4). It records two live Arabic phrases spoken by Microsoft Naayf and uses a labeled browser test to show caption fallback when an Arabic voice is unavailable.
+The 76-second demo uses English narration to introduce the workshop, show the built-in sample and mixer, and explain tab capture. The actual capture comes from a second tab playing [the Swedish workshop clip](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final/Workshop-Briefing-SV.mp4). The recording includes two live Arabic phrases spoken by Microsoft Naayf. A labeled browser test shows captions when an Arabic voice is unavailable.
 
 ## Run locally
 
@@ -34,13 +34,13 @@ npm run test:browser
 npm run build
 ```
 
-The automated tests cover sample playback and timeline, live queue ordering and cancellation, and the three-segment history limit. Chrome integration tests inject controlled speech, translation and synthesis providers to verify live caption rendering and ducking. A separate Chrome test shares a real browser tab and checks for incoming waveform energy. Desktop, Arabic playback and mobile screenshots are stored under `test-results/`.
+The automated tests cover sample playback and timeline, live queue ordering and cancellation, and the three-segment history limit. Chrome integration tests inject controlled speech, translation and synthesis providers to verify live caption rendering and ducking. A separate Chrome test shares a real tab, checks for incoming waveform energy, and verifies track release on stop. Desktop, Arabic playback and mobile screenshots are stored under `test-results/`.
 
 The built-in Translator API translates finalized recognition segments and has no prompt or context parameter. The session holds the last three translated pairs in memory. In a production test on desktop Chrome for Windows, VoxBridge captured a Swedish sentence from another tab, rendered its Arabic translation, and completed playback of that text using the installed Microsoft Naayf voice. Let the translation model finish preparing before starting the source audio. If Chrome has no Arabic voice, the studio displays live Arabic subtitles and identifies the unavailable voice in the Arabic track.
 
 ## Design and provenance
 
-Both waveforms use peak data measured from the packaged PCM tracks. The two tracks have separate pitch-preserving media elements and Web Audio gain stages. The sample plays each complete source phrase followed by its dub and advances the captions after both finish. The transport shows the sequential timing and retries once if a track stalls. Ducking lowers source gain only when the two tracks overlap and Arabic voice is enabled. Captions follow the source cue. The responsive layout stacks captions on narrow screens.
+The two sample waveforms use measured peaks from the packaged PCM tracks. Each track has a pitch-preserving media element and a Web Audio gain stage. The sample plays each complete source phrase followed by its dub and advances the captions after both finish. In live mode, the Swedish waveform comes from captured audio and the Arabic activity meter follows browser speech events. Live ducking lowers the original while Arabic is speaking on browsers that confirm source suppression. The responsive layout stacks captions on narrow screens.
 
 The workshop scenario, texts, timing and motion are specific to this project. The sample files were rendered locally with sherpa-onnx 1.12.40. The Swedish voice is [Piper NST](https://huggingface.co/rhasspy/piper-voices/blob/main/sv/sv_SE/nst/medium/MODEL_CARD) and the Arabic voice is [Nabra-82M INT8](https://huggingface.co/marwanelamami/nabra-82m-sherpa-onnx/tree/7fe12ea). The recordings were trimmed, level-matched, and exported as separate mono WAV files. The browser plays the packaged audio and uses no synthesis dependency or service to run the sample. The sample contains no Car Care customer data.
 

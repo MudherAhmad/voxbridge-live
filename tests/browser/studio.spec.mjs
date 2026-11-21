@@ -172,6 +172,7 @@ test('live capture wires finalized tab speech to Arabic captions, voice and duck
     results: [{ isFinal: true, 0: { transcript: 'Sista meningen' } }],
   }));
   await expect(page.getByText('Arabic voice unavailable', { exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Arabic only' })).toBeDisabled();
   await expect(page.locator('p[lang="sv"]')).toHaveText('Sista meningen');
   await expect(page.locator('p[lang="ar"]')).toHaveText('\u0623\u0645\u0631 \u0627\u0644\u0639\u0645\u0644');
   await expect(page.locator('.status')).toContainText('No Arabic speech voice is available.');

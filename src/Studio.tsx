@@ -354,7 +354,7 @@ export function Studio() {
             {(!capturing || canDuck && liveEnabled) && <div className="mix-presets" role="group" aria-label="Listening mode">
               <button type="button" aria-pressed={original === defaultMix.original && arabic === defaultMix.arabic && voice}
                 onClick={() => changeMix({ original: defaultMix.original, arabic: defaultMix.arabic, voice: true })}>Balanced mix</button>
-              <button type="button" aria-pressed={original === 0 && dubEnabled}
+              <button type="button" aria-pressed={original === 0 && dubEnabled} disabled={capturing && !liveVoices.length}
                 onClick={() => changeMix({ original: 0, arabic: arabic || defaultMix.arabic, voice: true })}>Arabic only</button>
               <button type="button" aria-pressed={original > 0 && !dubEnabled}
                 onClick={() => changeMix({ original: original || defaultMix.original, arabic: 0 })}>Swedish only</button>

@@ -23,7 +23,7 @@ The built-in sample plays each complete Swedish sentence followed by its Arabic 
 
 ## Video upload copy
 
-- [Download the 78-second showcase MP4 with English captions](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-showcase/VoxBridge-Kiroween-Showcase.mp4)
+- [Download the 76-second demo MP4 with English narration](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-audit/VoxBridge-Kiroween-Narrated.mp4)
 - YouTube title: VoxBridge Live | Swedish-to-Arabic Workshop Dubbing | Kiroween 2026
 - YouTube description: Follow an Arabic-speaking technician through a Swedish workshop briefing. The showcase plays the built-in sample, changes listening modes, and records live Chrome translation and speech from a second tab. A labeled browser test demonstrates captions when an Arabic voice is unavailable. Try it at https://voxbridge-live.vercel.app/ and see the source at https://github.com/MudherAhmad/voxbridge-live.
 - Visibility: Public. Add the resulting YouTube link to the Devpost form.
@@ -34,7 +34,8 @@ The built-in sample plays each complete Swedish sentence followed by its Arabic 
 - The Kiro tooling statement is pending a documented development session. The repository contains specs, steering, and a save hook configuration prepared for that session.
 - The bundled sample, desktop tab capture, and live Swedish-to-Arabic voice output have been verified. The live test used desktop Chrome on Windows with the Microsoft Naayf Arabic voice installed. Devices without an Arabic browser voice show live Arabic subtitles.
 - A separate Edge profile on the same Windows computer played the packaged Arabic track, paused, resumed, and acquired tab audio. Its translation model timed out during setup. The supported live release target is desktop Chrome.
-- The no-voice test supplies a controlled bilingual phrase through the studio, verifies the visible recovery instruction, retains captions, and checks that the original audio stays at its set level.
+- The no-voice test supplies a controlled bilingual phrase through the studio, verifies the visible recovery instruction, retains captions, disables **Arabic only**, and checks that the original audio stays at its set level.
+- The [independent review](AUDIT.md) records the source, media, test results, and remaining eligibility checks.
 - The public YouTube upload and formal Devpost submission are pending. The entry deadline is **December 4, 2026 at 23:00 Sweden time**. The entrant or team representative confirms the entry details and declarations.
 
 [Official Kiroween rules](https://kiroween.devpost.com/rules)
