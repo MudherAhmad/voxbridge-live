@@ -12,8 +12,10 @@
 - [x] Connect desktop browser speech recognition, built-in translation, and available Arabic speech synthesis to shared tab audio.
 - [x] Implement a three-segment in-memory history and a serialized live dub queue with backlog rate control. Add property tests for the live invariants.
 - [x] Add a live source gain stage gated on confirmed browser suppression, with a fallback to the browser-controlled source mix.
-- [x] Verify real Swedish tab capture, Arabic captions, and the installed Microsoft Naayf voice on desktop Chrome for Windows. Record both live utterances in the public demo.
+- [x] Verify real Swedish tab capture, Arabic captions, and a browser Arabic voice on desktop Chrome for Windows. Use the live caption footage in the film with the recreated Nabra soundtrack labeled.
 - [x] Publish the open-source GitHub repository, working build, English presentation, and Swedish test clip.
 - [x] Record Kiro's implementation, tests, and save-hook execution.
-- [ ] Confirm recording rights, publish the demo to YouTube, and submit the Devpost form.
+- [x] Replace the earlier system-voice recording in the submission film and document its soundtrack sources.
+- [ ] Publish the submission film on YouTube and submit the Devpost form.
 - [ ] Test live audio synthesis on a second physical computer before claiming results beyond the verified Chrome and Windows configuration.
+- [x] Add the curated Swedish–Arabic workshop glossary and verify sample cue highlighting, live matching, first-heard order, retention through a failed phrase, and reset.

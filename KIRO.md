@@ -31,4 +31,8 @@ PostFileSave executed
 npm test exit: 0
 ```
 
-[Watch the narrated film with the Kiro chapter](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-polished/VoxBridge-Kiroween-Polished.mp4) · [Kiro Hooks documentation](https://kiro.dev/docs/hooks/)
+## Workshop glossary follow-up
+
+A later Kiro CLI V3 session began at [92cadca](https://github.com/MudherAhmad/voxbridge-live/commit/92cadcafdfa484173bd63f281428ec0a53ae751f). Kiro read the existing spec and steering, wrote glossary acceptance criteria, implemented the bilingual list and Swedish term matcher, and added browser and matcher cases. It reused the studio's three existing term pairs and its finalized translation callback. Independent review consolidated the regression cases and verified matching across Unicode normalization and whitespace, first-heard order within a single phrase, and retention through a failed phrase.
+
+[Watch the narrated film with the Kiro chapter](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-submission/VoxBridge-Kiroween-Submission.mp4) · [Kiro Hooks documentation](https://kiro.dev/docs/hooks/)

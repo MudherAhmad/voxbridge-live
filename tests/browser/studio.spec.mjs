@@ -544,3 +544,65 @@ test('Arabic-only sample mix restores original gain on capture', async ({ page }
   expect(captureGains.every(v => v > 0)).toBe(true);
   await page.getByRole('button', { name: 'Stop capture' }).click();
 });
+
+// ----- Workshop glossary regression tests -----
+
+test('the workshop sample shows three curated pairs and identifies the current term', async ({ page }) => {
+  await page.goto('/');
+  const glossary = page.getByRole('region', { name: 'Workshop terms' });
+  await expect(glossary.locator('dt')).toHaveText(['invändig rengöring', 'arbetsordern', 'receptionen']);
+  await expect(glossary.locator('[aria-current=true] dt')).toHaveText('invändig rengöring');
+  await expect(glossary.locator('dd[lang=ar][dir=rtl]')).toHaveText(['التنظيف الداخلي', 'أمر العمل', 'الاستقبال']);
+});
+
+test('live workshop terms follow successful captions, stay unique and reset on a new share', async ({ page }) => {
+  await page.addInitScript(() => {
+    navigator.mediaDevices.getDisplayMedia = async () => {
+      const context = new AudioContext();
+      return context.createMediaStreamDestination().stream;
+    };
+    Object.defineProperty(window, 'Translator', { value: {
+      async create() {
+        return {
+          async translate(text) {
+            if (text.startsWith('Misslyckad')) throw new Error('test failure');
+            return 'ترجمة العبارة';
+          },
+          destroy() {},
+        };
+      },
+    } });
+    Object.defineProperty(window, 'SpeechRecognition', { value: class {
+      start() { window.recognizer = this; }
+      abort() {}
+    } });
+  });
+  await page.goto('/');
+  const capture = page.getByRole('button', { name: 'Capture tab audio' });
+  const stop = page.getByRole('button', { name: 'Stop capture' });
+  const glossary = page.getByRole('region', { name: 'Workshop terms' });
+  const rows = glossary.locator('dt');
+  await capture.click();
+  await expect(glossary).toContainText('No terms recognized yet');
+  await page.getByRole('button', { name: 'Enable live dubbing' }).click();
+  await expect(page.locator('.status')).toContainText('Listening');
+  await page.getByRole('checkbox', { name: 'Arabic voice' }).uncheck();
+  const finalize = transcript => page.evaluate(text => window.recognizer.onresult({
+    resultIndex: 0, results: [{ isFinal: true, 0: { transcript: text } }],
+  }), transcript);
+
+  await finalize('Receptionen öppnar, se arbetsordern.');
+  await expect(rows).toHaveText(['receptionen', 'arbetsordern']);
+  await finalize('Misslyckad invändig rengöring');
+  await expect(page.locator('.status')).toContainText('could not be translated');
+  await expect(rows).toHaveText(['receptionen', 'arbetsordern']);
+  await finalize('För receptionen gäller invändig rengöringen.');
+  await expect(page.locator('p[lang=sv]')).toContainText('rengöringen');
+  await expect(rows).toHaveText(['receptionen', 'arbetsordern']);
+
+  await stop.click();
+  await capture.click();
+  await expect(glossary).toContainText('No terms recognized yet');
+  await expect(rows).toHaveCount(0);
+  await stop.click();
+});

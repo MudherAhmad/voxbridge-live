@@ -2,11 +2,11 @@
 
 A browser-based dubbing studio for multilingual workshops. The first supported product scenario is a Swedish workshop briefing with Arabic captions and audio.
 
-[Open VoxBridge Live](https://voxbridge-live.vercel.app/) · [Watch the narrated demo](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-polished/VoxBridge-Kiroween-Polished.mp4) · [How Kiro helped](KIRO.md) · [Independent review](AUDIT.md) · [Kiroween submission materials](SUBMISSION.md)
+[Open VoxBridge Live](https://voxbridge-live.vercel.app/) · [Watch the submission film](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-submission/VoxBridge-Kiroween-Submission.mp4) · [How Kiro helped](KIRO.md) · [Independent review](AUDIT.md) · [Kiroween submission materials](SUBMISSION.md)
 
 Try the sample on desktop or mobile. Live tab capture targets desktop Chrome.
 
-The narrated demo introduces the workshop, shows the built-in sample and mixer, and explains tab capture. The actual capture comes from a second tab playing [the Swedish workshop clip](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final/Workshop-Briefing-SV.mp4). The recording includes two live Arabic phrases spoken by Microsoft Naayf. A labeled browser test shows captions when an Arabic voice is unavailable. The closing chapter shows how Kiro helped specify and implement two live reliability improvements.
+The narrated demo shows the sample, independent speeds, voice controls, bilingual glossary, tab capture, and how Kiro helped build them. A recorded Chrome session shows live captions from [the Swedish workshop clip](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final/Workshop-Briefing-SV.mp4). The film labels the recreated Nabra Arabic soundtrack and the simulated missing-voice test.
 
 ## Run locally
 
@@ -24,6 +24,8 @@ Open the local URL printed by Vite. Select **Play workshop sample** to hear the 
 The live browser speech recognizer may send your shared audio to its online recognition service. Translation uses the browser model. VoxBridge itself stores no captured media or credentials. Stop capture to end recognition, cancel synthesis, and release the shared tracks.
 
 The bundled sample uses pretranslated text and synthesized audio, with Web Audio doing the mixing during playback. It needs no language model or installed voice.
+
+The **Workshop terms** section uses three curated Swedish–Arabic pairs from the sample. In a live share, it lists the terms heard in successfully translated Swedish phrases, in first-heard order. It retains them through a failed phrase and starts fresh with a new share. It stays alongside the browser's captions and uses no persistent storage.
 
 ## Verification
 
@@ -46,4 +48,4 @@ The workshop scenario, texts, timing and motion are specific to this project. Th
 
 See [.kiro specs](.kiro/specs/live-dub/design.md) for design choices, [How Kiro helped](KIRO.md) for development evidence, and [the task record](.kiro/specs/live-dub/tasks.md) for remaining checks.
 
-The [offline review packet](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-polished/VoxBridge-Gemini-Polished-Review.txt) includes the source text, test evidence, and film links.
+The [contest review](CONTEST.md) links the rules, prior winners, research, and submission checklist. The [offline review packet](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-submission/VoxBridge-Kiroween-Review.txt) includes the source text, test evidence, and film links.

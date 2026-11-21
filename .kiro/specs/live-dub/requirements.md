@@ -19,6 +19,22 @@ Build a Swedish-to-Arabic workshop briefing studio. Target the built-in sample a
 
 9. Keep tab sharing active if the translation model stops making progress for 60 seconds. Only an increase in reported download progress extends the wait. Show how to retry live dubbing without sharing the tab again. Label the live voice selector so users know a change applies to the next phrase.
 
+## Workshop glossary
+
+10. Display a compact, labeled Workshop terms section below the captions panel. Mark it as a curated reference. Never store terms or transcripts on a server.
+
+11. In sample mode, list all three Swedish–Arabic term pairs from workshop.json. Indicate the term for the current cue with a distinct color and `aria-current="true"` on its row. The other two rows must not carry `aria-current`.
+    Acceptance: while the sample is playing and the first cue is active, the row for "invändig rengöring / التنظيف الداخلي" carries `aria-current="true"` and the other two rows do not.
+
+12. During live capture, show only glossary pairs whose Swedish term has appeared as a whole word or phrase in a finalized, translated segment during the current share. Retain matches in first-seen order. Keep them through a failed translation or a retry in the same share. Clear them when a new share begins.
+    Acceptance: given two finalized segments whose combined text contains "arbetsordern" but not the other two terms, only the "arbetsordern / أمر العمل" row is shown; after stop and re-share the row is gone.
+
+13. Match Swedish terms case-insensitively with Unicode letter boundaries: the matched term must not be part of a longer word. Normalized whitespace (a run of one or more Unicode whitespace characters equals one space) applies to both the term and the segment text before matching.
+    Acceptance: "ARBETSORDERN" matches; "arbetsorderna" does not; "  invändig  rengöring  " matches "invändig rengöring".
+
+14. When no live terms have been matched yet, the glossary section is present but shows a "No terms recognized yet" placeholder instead of rows.
+    Acceptance: immediately after enabling live dubbing and before any finalized segment, the placeholder is visible and no term rows are present.
+
 ## Future scope
 
 Context-aware translation, explicit VAD segmentation, neural live synthesis, and additional language pairs are follow-up work. The three-pair history is used for session captions, and Chrome translates each finalized input phrase independently.

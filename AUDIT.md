@@ -4,7 +4,7 @@ Reviewed November 21, 2026 in Sweden. This report records evidence for a new rev
 
 - [Production studio](https://voxbridge-live.vercel.app/)
 - [Public repository](https://github.com/MudherAhmad/voxbridge-live)
-- [Narrated demo with the Kiro chapter](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-polished/VoxBridge-Kiroween-Polished.mp4)
+- [Narrated demo with the Kiro chapter](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-submission/VoxBridge-Kiroween-Submission.mp4)
 - [Kiro development and verification record](KIRO.md)
 - [Official rules](https://kiroween.devpost.com/rules)
 
@@ -21,6 +21,7 @@ Reviewed November 21, 2026 in Sweden. This report records evidence for a new rev
 | Updated production | Verified the public URL after publishing the missing-voice fix. The HTML, JavaScript, CSS, and ten WAV files each returned HTTP 200 and matched the updated local build by SHA-256 (13/13). |
 | Kiro follow-up | Kiro updated the spec and implemented live translation recovery and source gain restoration on capture. Two new browser regressions failed on the previous code and passed after the fixes. The updated browser suite passed 15/15. The TypeScript check, five audio and property tests, and production build also passed. All 13 public production files matched the new build by SHA-256. |
 | Reviewer follow-up | Added a visible next-phrase explanation for live voice selection. Tested both missing Arabic voices and the absence of the synthesis API. A stalled model now gets 60 seconds without advancing progress before offering a retry that retains tab sharing. The controlled timeout and retry regression passed. The full browser suite passed 16/16, the audio suite passed 5/5, and typecheck and build succeeded. |
+| Workshop glossary | Kiro added requirements and implementation for the curated reference. Match tests cover Swedish Unicode, boundaries, and term order. Browser tests cover the sample cue, same-share deduplication and recovery, rejection of a longer word, and reset on a new share. The expanded suite passed 18/18 browser and 8/8 unit and property tests. Typecheck and production build passed. |
 
 ## What the product delivers
 
@@ -32,15 +33,15 @@ The requirements and design describe the shipped Swedish-to-Arabic workflow and 
 
 ## Video and media
 
-The early 78-second cut had approximately eight seconds of opening silence, an internal gap near twelve seconds, and a closing silent stretch over sixteen seconds. The latest cut is 87.91 seconds. It keeps the original live audio, replaces rapid switches with a labeled split view of the source and studio, shows the enable control and ready state, and explains why the Swedish mix drops from 40% to 4% in the recording. The no-voice scene is labeled and narrated as a simulation. The closing chapter describes the actual Kiro development work and save-hook check. FFmpeg decoded the complete film. The longest interval under −45 dB was 1.43 seconds.
+The submission film shows real application footage and a labeled recording of a live Chrome capture. The two live-caption scenes use freshly rendered Nabra audio from the displayed Arabic text. Every live-capture audio stream in the edit is replaced by original workshop audio or newly generated narration and Arabic speech. Earlier review cuts included a recorded system voice. The missing-voice scene is labeled as a simulation. The Kiro chapter explains the implementation, regressions and executed save hook.
 
-The original workshop script and visuals are project material. Source references for the packaged and alternate voices appear in the [README](README.md). [Piper NST](https://huggingface.co/rhasspy/piper-voices/blob/main/sv/sv_SE/nst/medium/MODEL_CARD) lists CC0 training data. The [Nabra INT8 model](https://huggingface.co/marwanelamami/nabra-82m-sherpa-onnx/tree/7fe12ea) lists Apache-2.0. English narration uses [Piper LJSpeech](https://huggingface.co/rhasspy/piper-voices/blob/main/en/en_US/ljspeech/medium/MODEL_CARD), whose card identifies public-domain training data. Repository MIT licensing covers project code. The voice-model metadata was checked separately. Public-use rights for the recorded Microsoft Naayf output remain to be confirmed by the entrant before final contest submission.
+The workshop script, recordings and visuals were created for this project. The Swedish sample uses [Piper NST](https://huggingface.co/rhasspy/piper-voices/blob/main/sv/sv_SE/nst/medium/MODEL_CARD), whose model card lists CC0 training data. The Arabic sample and the recreated soundtrack use [Nabra-82M INT8](https://huggingface.co/marwanelamami/nabra-82m-sherpa-onnx/tree/7fe12ea), listed as Apache-2.0 by its publisher. English narration uses [Piper LJSpeech](https://huggingface.co/rhasspy/piper-voices/blob/main/en/en_US/ljspeech/medium/MODEL_CARD), whose card identifies public-domain training data. The submission film uses no recorded system-voice audio. Source references for the optional bundled voices appear in the [README](README.md). MIT covers project code.
 
 ## Submission status
 
 The public source, MIT license, root Kiro files, live site, and downloadable video are available. The [submission materials](SUBMISSION.md) include draft fields and the reproducible testing instructions.
 
-The initial audit found a signed-out desktop session. In the follow-up, the entrant authorized Kiro CLI and Kiro implemented [two live reliability improvements](KIRO.md). Confirm the recorded media rights before final publication. A public YouTube URL and a submitted Devpost entry remain outstanding. The verified deadline is **December 4, 2026 at 23:00 in Sweden**.
+The entrant authorized Kiro CLI, and Kiro implemented [two live reliability improvements and the workshop glossary](KIRO.md). The [contest review](CONTEST.md) provides the rules checklist and the sources behind the positioning. A public YouTube URL and submitted Devpost entry remain outstanding. The verified deadline is **December 4, 2026 at 23:00 in Sweden**.
 
 The [official rules](https://kiroween.devpost.com/rules) screen theme fit and meaningful Kiro use before scoring. The five scored criteria are impact, technological implementation, design, innovation, and presentation, at 20% each. The November 20 public repository date is within the submission window. The entrant must still confirm project provenance, any incorporated pre-existing work, team eligibility, and media permissions. A numeric score for the demo cannot establish eligibility.
 

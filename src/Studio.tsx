@@ -10,6 +10,7 @@ import { defaultMix } from './audio/timeline';
 import sample from './audio/workshop.json';
 import { sampleDuration, sequentialPeaks } from './audio/sampleSchedule';
 import voicePeaks from './audio/voices/peaks.json';
+import { updateLiveMatches } from './audio/glossary';
 
 const duration = sampleDuration;
 const sampleRates = [0.75, 0.9, 1, 1.1, 1.25, 1.5];
@@ -43,6 +44,33 @@ function Wave({ peaks, progress }: { peaks: number[]; progress: number }) {
   </div>;
 }
 
+const sampleTermIndices = sample.lines.map((_, index) => index);
+
+function WorkshopGlossary({ activeSampleIndex, liveMatches }: { activeSampleIndex: number; liveMatches?: number[] }) {
+  const indices = liveMatches ?? sampleTermIndices;
+  return (
+    <section className="workshop-glossary" aria-label="Workshop terms">
+      <header className="glossary-head">
+        <h2>Workshop terms</h2>
+        <span className="glossary-ref">Curated reference · Swedish–Arabic</span>
+      </header>
+      {indices.length === 0
+        ? <p className="glossary-empty">No terms recognized yet</p>
+        : <dl className="glossary-list">
+            {indices.map(index => {
+              const { termSv, termAr } = sample.lines[index];
+              const current = !liveMatches && index === activeSampleIndex;
+              return <div key={index} className="glossary-row" aria-current={current || undefined}>
+                <dt lang="sv">{termSv}</dt>
+                <dd lang="ar" dir="rtl">{termAr}</dd>
+              </div>;
+            })}
+          </dl>
+      }
+    </section>
+  );
+}
+
 export function Studio() {
   const [mode, setMode] = useState<'ready' | 'loading' | 'sample' | 'paused' | 'opening' | 'capture'>('ready');
   const [status, setStatus] = useState(idleStatus);
@@ -66,6 +94,7 @@ export function Studio() {
   const [canDuck, setCanDuck] = useState(false);
   const [draft, setDraft] = useState('');
   const [translatedLine, setTranslatedLine] = useState<{sv: string; ar: string} | null>(null);
+  const [liveGlossaryMatches, setLiveGlossaryMatches] = useState<number[]>([]);
 
   useEffect(() => () => stopCurrent.current(), []);
   useEffect(() => {
@@ -175,6 +204,7 @@ export function Studio() {
     setCanDuck(false);
     setDraft('');
     setTranslatedLine(null);
+    setLiveGlossaryMatches([]);
     setMode('opening');
     setStatus('Choose a browser tab and enable Share tab audio.');
     try {
@@ -240,7 +270,11 @@ export function Studio() {
     const session = createLiveSpeech(audio.track, settings.voice ? settings.arabic / 100 : 0, {
       progress: setStatus,
       transcript: setDraft,
-      translated: history => setTranslatedLine(history[history.length - 1]),
+      translated: history => {
+        const latest = history[history.length - 1];
+        setTranslatedLine(latest);
+        setLiveGlossaryMatches(previous => updateLiveMatches(previous, latest.sv, sample.lines));
+      },
       speaking(speaking) {
         speakingNow.current = speaking;
         setLiveSpeaking(speaking);
@@ -414,6 +448,11 @@ export function Studio() {
           <article><h2>Original <span>SV</span></h2><p lang="sv">{sharing ? translatedLine?.sv || draft || '—' : highlight(line.sv, line.termSv)}</p></article>
           <article className="arabic"><h2>Translation <span>AR</span></h2><p lang="ar" dir="rtl">{sharing ? translatedLine?.ar || '—' : highlight(line.ar, line.termAr)}</p></article>
         </section>
+
+        <WorkshopGlossary
+          activeSampleIndex={sampleFrame.segment}
+          liveMatches={sharing ? liveGlossaryMatches : undefined}
+        />
       </main>
     </div>
   );
