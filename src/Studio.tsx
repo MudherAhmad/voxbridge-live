@@ -370,15 +370,18 @@ export function Studio() {
             <details className="audio-tuning">
               <summary>Audio tuning</summary>
               <div className="tuning-controls">
-                {capturing && liveEnabled && <label>Live Arabic voice
-                  <select value={liveVoice} onChange={event => {
-                    setLiveVoice(event.target.value);
-                    liveSpeech.current?.setVoice(event.target.value);
-                  }}>
+                {capturing && liveEnabled && liveVoices.length > 0 && <div className="live-voice-control">
+                  <label htmlFor="live-arabic-voice">Live Arabic voice</label>
+                  <select id="live-arabic-voice" aria-describedby="live-arabic-voice-hint" value={liveVoice}
+                    onChange={event => {
+                      setLiveVoice(event.target.value);
+                      liveSpeech.current?.setVoice(event.target.value);
+                    }}>
                     <option value="">Browser default</option>
                     {liveVoices.map(voice => <option key={voice.voiceURI} value={voice.voiceURI}>{voice.name}</option>)}
                   </select>
-                </label>}
+                  <small id="live-arabic-voice-hint" className="muted">Voice changes apply to the next phrase.</small>
+                </div>}
                 {!sharing && <div className="sample-options">
                   {sampleChannels.map(({ id, language }) => (
                     <fieldset className={'track-options ' + id} key={id}>

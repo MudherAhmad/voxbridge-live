@@ -27,7 +27,7 @@ We used Kiro CLI with the project's steering and spec files to define and implem
 
 ## Video upload copy
 
-- [Download the narrated demo with the Kiro chapter](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-kiro-review/VoxBridge-Kiroween-Kiro.mp4)
+- [Download the 88-second narrated demo with the Kiro chapter](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-polished/VoxBridge-Kiroween-Polished.mp4)
 - YouTube title: VoxBridge Live | Swedish-to-Arabic Workshop Dubbing | Kiroween 2026
 - YouTube description: Follow an Arabic-speaking technician through a Swedish workshop briefing. The showcase plays the built-in sample, changes listening modes, and records live Chrome translation and speech from a second tab. A labeled browser test demonstrates captions when an Arabic voice is unavailable. See how Kiro helped the studio recover from a failed translation and restore audibility on capture. Try it at https://voxbridge-live.vercel.app/ and see the source at https://github.com/MudherAhmad/voxbridge-live.
 - Visibility: Public. Add the resulting YouTube link to the Devpost form.

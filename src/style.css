@@ -115,6 +115,7 @@ mark { background: transparent; color: var(--accent); font-weight: 720; }
 .audio-tuning { flex: 0 0 100%; }
 .audio-tuning summary { width: fit-content; cursor: pointer; padding: .3rem .55rem; border: 1px solid var(--line); border-radius: .45rem; color: #d2dde0; }
 .tuning-controls { display: flex; flex-wrap: wrap; gap: .75rem 1rem; margin-top: .65rem; }
+.live-voice-control { display: grid; align-content: start; gap: .25rem; }
 .mix .original-control .fader-value { color: var(--amber); }
 .mix .arabic-control .fader-value { color: var(--mint); }
 .mix-level strong { display: inline-block; inline-size: 4ch; text-align: right; }

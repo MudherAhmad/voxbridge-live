@@ -31,4 +31,4 @@ PostFileSave executed
 npm test exit: 0
 ```
 
-[Watch the narrated film with the Kiro chapter](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-kiro-review/VoxBridge-Kiroween-Kiro.mp4) · [Kiro Hooks documentation](https://kiro.dev/docs/hooks/)
+[Watch the narrated film with the Kiro chapter](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-polished/VoxBridge-Kiroween-Polished.mp4) · [Kiro Hooks documentation](https://kiro.dev/docs/hooks/)

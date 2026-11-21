@@ -87,6 +87,8 @@ test('switching to capture closes the sample and releases shared tracks when sto
 });
 
 test('live capture wires finalized tab speech to Arabic captions, voice and ducking', async ({ page }) => {
+  const pageErrors = [];
+  page.on('pageerror', error => pageErrors.push(error.message));
   await page.addInitScript(() => {
     navigator.mediaDevices.getDisplayMedia = async options => {
       window.captureOptions = options;
@@ -148,6 +150,7 @@ test('live capture wires finalized tab speech to Arabic captions, voice and duck
   await expect(liveMeter).toBeVisible();
   expect(await liveMeter.evaluate(meter => meter.clientWidth / meter.closest('.signal').clientWidth)).toBeGreaterThan(0.8);
   await expect(page.locator('.mix-level strong')).toHaveText('4%');
+  await expect(page.getByRole('combobox', { name: 'Live Arabic voice' })).toHaveAccessibleDescription('Voice changes apply to the next phrase.');
   await page.getByRole('combobox', { name: 'Live Arabic voice' }).selectOption('other-ar');
   expect(await page.evaluate(() => window.spoken.voice.voiceURI)).toBe('default-ar');
   await page.evaluate(() => {
@@ -179,8 +182,65 @@ test('live capture wires finalized tab speech to Arabic captions, voice and duck
   await expect(page.locator('.status')).toContainText('Install an Arabic text-to-speech voice and reopen Chrome');
   await expect(page.locator('.mix-level strong')).toHaveText('40%');
   expect(await page.evaluate(() => window.spoken)).toBeUndefined();
+  await expect(page.getByRole('combobox', { name: 'Live Arabic voice' })).toHaveCount(0);
+  await page.evaluate(() => {
+    Object.defineProperty(window, 'speechSynthesis', { value: undefined });
+    window.recognizer.onresult({ resultIndex: 0, results: [{ isFinal: true, 0: { transcript: 'Ingen talsyntes' } }] });
+  });
+  await expect(page.locator('p[lang="sv"]')).toHaveText('Ingen talsyntes');
+  await expect(page.locator('p[lang="ar"]')).toHaveText('أمر العمل');
   await page.getByRole('button', { name: 'Stop capture' }).click();
   expect(await page.evaluate(() => [window.recognitionAborted, window.translatorDestroyed, window.testTrack.readyState])).toEqual([true, true, 'ended']);
+  expect(pageErrors).toEqual([]);
+});
+
+test('model setup allows slow progress and retries on the existing shared track', async ({ page }) => {
+  await page.addInitScript(() => {
+    navigator.mediaDevices.getDisplayMedia = async () => {
+      const context = new AudioContext();
+      const stream = context.createMediaStreamDestination().stream;
+      window.sharedTrack = stream.getAudioTracks()[0];
+      return stream;
+    };
+    const setTimeout = window.setTimeout.bind(window);
+    window.watchdogs = [];
+    window.setTimeout = (callback, delay, ...args) => {
+      if (delay === 60000) window.watchdogs.push(callback);
+      return setTimeout(callback, delay, ...args);
+    };
+    const download = new EventTarget();
+    window.downloadProgress = loaded => download.dispatchEvent(Object.assign(new Event('downloadprogress'), { loaded }));
+    let attempts = 0;
+    Object.defineProperty(window, 'Translator', { value: {
+      async create({ monitor, signal }) {
+        if (++attempts > 1) return { destroy() {} };
+        monitor(download);
+        return new Promise((_, reject) => signal.addEventListener('abort', () => reject(signal.reason), { once: true }));
+      },
+    } });
+    Object.defineProperty(window, 'SpeechRecognition', { value: class {
+      start(track) { window.recognitionTrack = track; }
+      abort() {}
+    } });
+  });
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Capture tab audio' }).click();
+  const enable = page.getByRole('button', { name: 'Enable live dubbing' });
+  await enable.click();
+  const status = page.locator('.status');
+  await expect(status).toContainText('Preparing');
+  await page.evaluate(() => window.downloadProgress(0.35));
+  await expect(status).toContainText('35%');
+  await page.evaluate(() => window.downloadProgress(0.35));
+  expect(await page.evaluate(() => window.watchdogs.length)).toBe(2);
+  await page.evaluate(() => window.watchdogs.at(-1)());
+  await expect(status).toContainText('no progress for 60 seconds');
+  expect(await page.evaluate(() => window.sharedTrack.readyState)).toBe('live');
+  await enable.click();
+  await expect(status).toContainText('Listening to the shared tab');
+  expect(await page.evaluate(() => window.recognitionTrack === window.sharedTrack)).toBe(true);
+  await page.getByRole('button', { name: 'Stop capture' }).click();
+  expect(await page.evaluate(() => window.sharedTrack.readyState)).toBe('ended');
 });
 
 

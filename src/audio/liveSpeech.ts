@@ -22,6 +22,7 @@ const browser = window as Browser;
 const missingArabicVoice = 'No Arabic speech voice is available. Live Arabic subtitles remain enabled. Install an Arabic text-to-speech voice and reopen Chrome to hear the dub.';
 const translationFailedStatus = 'This phrase could not be translated. Listening for the next phrase.';
 const listeningStatus = 'Listening to the shared tab for Swedish speech.';
+const modelStallMs = 60000;
 
 export function arabicVoices() {
   return window.speechSynthesis?.getVoices().filter(voice => /^ar(?:-|$)/i.test(voice.lang)) ?? [];
@@ -124,18 +125,21 @@ export function createLiveSpeech(track: MediaStreamTrack, initialVolume: number,
     }
     const watchDownload = () => {
       clearTimeout(modelTimer);
-      modelTimer = window.setTimeout(() => fail('No translation model progress for 30 seconds. Check Chrome’s connection and try again. Tab audio remains available.'), 30000);
+      modelTimer = window.setTimeout(() => fail('The translation model made no progress for 60 seconds. Check your connection, then select Enable live dubbing to retry. Tab audio is still shared.'), modelStallMs);
     };
     try {
+      let downloaded = -1;
       watchDownload();
       reportProgress('Preparing the Swedish-to-Arabic language model…');
       const model = await browser.Translator.create({
         sourceLanguage: 'sv', targetLanguage: 'ar', signal,
         monitor(target) {
           target.addEventListener('downloadprogress', event => {
-            if (signal.aborted) return;
+            const progress = (event as ProgressEvent).loaded;
+            if (signal.aborted || progress <= downloaded) return;
+            downloaded = progress;
             watchDownload();
-            reportProgress(`Downloading translation model… ${Math.round((event as ProgressEvent).loaded * 100)}%`);
+            reportProgress(`Downloading translation model… ${Math.round(progress * 100)}%`);
           });
         },
       });

@@ -17,6 +17,8 @@ Build a Swedish-to-Arabic workshop briefing studio. Target the built-in sample a
 8. When a capture starts and the original gain is zero, use the 40% default so the source remains audible. Preserve custom nonzero values, and retain the saved sample mix if sharing is cancelled.
    Acceptance: after selecting Arabic-only, a cancelled share leaves the source level at 0%. Successful capture displays 40% and sets the original audio gain to 0.40 when the app can route the source.
 
+9. Keep tab sharing active if the translation model stops making progress for 60 seconds. Only an increase in reported download progress extends the wait. Show how to retry live dubbing without sharing the tab again. Label the live voice selector so users know a change applies to the next phrase.
+
 ## Future scope
 
 Context-aware translation, explicit VAD segmentation, neural live synthesis, and additional language pairs are follow-up work. The three-pair history is used for session captions, and Chrome translates each finalized input phrase independently.

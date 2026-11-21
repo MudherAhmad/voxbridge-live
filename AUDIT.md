@@ -4,7 +4,7 @@ Reviewed November 21, 2026 in Sweden. This report records evidence for a new rev
 
 - [Production studio](https://voxbridge-live.vercel.app/)
 - [Public repository](https://github.com/MudherAhmad/voxbridge-live)
-- [Narrated demo with the Kiro chapter](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-kiro-review/VoxBridge-Kiroween-Kiro.mp4)
+- [Narrated demo with the Kiro chapter](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-polished/VoxBridge-Kiroween-Polished.mp4)
 - [Kiro development and verification record](KIRO.md)
 - [Official rules](https://kiroween.devpost.com/rules)
 
@@ -20,6 +20,7 @@ Reviewed November 21, 2026 in Sweden. This report records evidence for a new rev
 | GitHub | Public access and MIT SPDX metadata verified. The five tracked Kiro files are at the root under `.kiro/` and are included in Git. License, README, submission materials, source and tests are present. No environment or credentials files with the checked names appeared in the tracked tree. This was a file inventory, with no claim of a full secret-history scan. |
 | Updated production | Verified the public URL after publishing the missing-voice fix. The HTML, JavaScript, CSS, and ten WAV files each returned HTTP 200 and matched the updated local build by SHA-256 (13/13). |
 | Kiro follow-up | Kiro updated the spec and implemented live translation recovery and source gain restoration on capture. Two new browser regressions failed on the previous code and passed after the fixes. The updated browser suite passed 15/15. The TypeScript check, five audio and property tests, and production build also passed. All 13 public production files matched the new build by SHA-256. |
+| Reviewer follow-up | Added a visible next-phrase explanation for live voice selection. Tested both missing Arabic voices and the absence of the synthesis API. A stalled model now gets 60 seconds without advancing progress before offering a retry that retains tab sharing. The controlled timeout and retry regression passed. The full browser suite passed 16/16, the audio suite passed 5/5, and typecheck and build succeeded. |
 
 ## What the product delivers
 
@@ -31,7 +32,7 @@ The requirements and design describe the shipped Swedish-to-Arabic workflow and 
 
 ## Video and media
 
-The previous 78-second cut had approximately eight seconds of opening silence, an internal gap near twelve seconds, and a closing silent stretch over sixteen seconds. The narrated review cut removed the long waits, added English narration, and kept the Swedish and Arabic demonstration audible. The subsequent cut replaces its closing chapter with a description of the actual Kiro work. The input material for the live segment is the recorded production session described above. The film labels the no-voice test as simulated.
+The early 78-second cut had approximately eight seconds of opening silence, an internal gap near twelve seconds, and a closing silent stretch over sixteen seconds. The latest cut is 87.91 seconds. It keeps the original live audio, replaces rapid switches with a labeled split view of the source and studio, shows the enable control and ready state, and explains why the Swedish mix drops from 40% to 4% in the recording. The no-voice scene is labeled and narrated as a simulation. The closing chapter describes the actual Kiro development work and save-hook check. FFmpeg decoded the complete film. The longest interval under −45 dB was 1.43 seconds.
 
 The original workshop script and visuals are project material. Source references for the packaged and alternate voices appear in the [README](README.md). [Piper NST](https://huggingface.co/rhasspy/piper-voices/blob/main/sv/sv_SE/nst/medium/MODEL_CARD) lists CC0 training data. The [Nabra INT8 model](https://huggingface.co/marwanelamami/nabra-82m-sherpa-onnx/tree/7fe12ea) lists Apache-2.0. English narration uses [Piper LJSpeech](https://huggingface.co/rhasspy/piper-voices/blob/main/en/en_US/ljspeech/medium/MODEL_CARD), whose card identifies public-domain training data. Repository MIT licensing covers project code. The voice-model metadata was checked separately. Public-use rights for the recorded Microsoft Naayf output remain to be confirmed by the entrant before final contest submission.
 
