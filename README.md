@@ -2,11 +2,11 @@
 
 A browser-based dubbing studio for multilingual workshops. The first supported product scenario is a Swedish workshop briefing with Arabic captions and audio.
 
-[Open VoxBridge Live](https://voxbridge-live.vercel.app/) · [Download the narrated demo](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-audit/VoxBridge-Kiroween-Narrated.mp4) · [Independent review](AUDIT.md) · [Kiroween submission materials](SUBMISSION.md)
+[Open VoxBridge Live](https://voxbridge-live.vercel.app/) · [Watch the narrated demo](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-kiro-review/VoxBridge-Kiroween-Kiro.mp4) · [How Kiro helped](KIRO.md) · [Independent review](AUDIT.md) · [Kiroween submission materials](SUBMISSION.md)
 
 Try the sample on desktop or mobile. Live tab capture targets desktop Chrome.
 
-The 76-second demo uses English narration to introduce the workshop, show the built-in sample and mixer, and explain tab capture. The actual capture comes from a second tab playing [the Swedish workshop clip](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final/Workshop-Briefing-SV.mp4). The recording includes two live Arabic phrases spoken by Microsoft Naayf. A labeled browser test shows captions when an Arabic voice is unavailable.
+The narrated demo introduces the workshop, shows the built-in sample and mixer, and explains tab capture. The actual capture comes from a second tab playing [the Swedish workshop clip](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final/Workshop-Briefing-SV.mp4). The recording includes two live Arabic phrases spoken by Microsoft Naayf. A labeled browser test shows captions when an Arabic voice is unavailable. The closing chapter shows how Kiro helped specify and implement two live reliability improvements.
 
 ## Run locally
 
@@ -44,4 +44,6 @@ The two sample waveforms use measured peaks from the packaged PCM tracks. Each t
 
 The workshop scenario, texts, timing and motion are specific to this project. The sample files were rendered locally with sherpa-onnx 1.12.40. The Swedish voice is [Piper NST](https://huggingface.co/rhasspy/piper-voices/blob/main/sv/sv_SE/nst/medium/MODEL_CARD) and the Arabic voice is [Nabra-82M INT8](https://huggingface.co/marwanelamami/nabra-82m-sherpa-onnx/tree/7fe12ea). The recordings were trimmed, level-matched, and exported as separate mono WAV files. The browser plays the packaged audio and uses no synthesis dependency or service to run the sample. The sample contains no Car Care customer data.
 
-See [.kiro specs](.kiro/specs/live-dub/design.md) for design choices and [the task record](.kiro/specs/live-dub/tasks.md) for unfinished work. The repository contains a proposed Kiro save hook. Record an actual Kiro run and the work Kiro performed before writing the Devpost tooling statement.
+See [.kiro specs](.kiro/specs/live-dub/design.md) for design choices, [How Kiro helped](KIRO.md) for development evidence, and [the task record](.kiro/specs/live-dub/tasks.md) for remaining checks.
+
+The [offline review packet](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-kiro-review/VoxBridge-Gemini-Kiro-Review.txt) includes the source text, test evidence, and film links.

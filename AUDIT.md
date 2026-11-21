@@ -4,7 +4,8 @@ Reviewed November 21, 2026 in Sweden. This report records evidence for a new rev
 
 - [Production studio](https://voxbridge-live.vercel.app/)
 - [Public repository](https://github.com/MudherAhmad/voxbridge-live)
-- [Narrated demo video](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-audit/VoxBridge-Kiroween-Narrated.mp4)
+- [Narrated demo with the Kiro chapter](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-kiro-review/VoxBridge-Kiroween-Kiro.mp4)
+- [Kiro development and verification record](KIRO.md)
 - [Official rules](https://kiroween.devpost.com/rules)
 
 ## What was checked
@@ -18,6 +19,7 @@ Reviewed November 21, 2026 in Sweden. This report records evidence for a new rev
 | Missing Arabic voice | Found that `Arabic only` could mute the original when no Arabic voice was available. The mode is now disabled in that state. The browser test injects deterministic language providers and verifies translated captions, missing-voice guidance, and source volume at the balanced level. The film labels this scene as a fallback test. |
 | GitHub | Public access and MIT SPDX metadata verified. The five tracked Kiro files are at the root under `.kiro/` and are included in Git. License, README, submission materials, source and tests are present. No environment or credentials files with the checked names appeared in the tracked tree. This was a file inventory, with no claim of a full secret-history scan. |
 | Updated production | Verified the public URL after publishing the missing-voice fix. The HTML, JavaScript, CSS, and ten WAV files each returned HTTP 200 and matched the updated local build by SHA-256 (13/13). |
+| Kiro follow-up | Kiro updated the spec and implemented live translation recovery and source gain restoration on capture. Two new browser regressions failed on the previous code and passed after the fixes. The updated browser suite passed 15/15. The TypeScript check, five audio and property tests, and production build also passed. All 13 public production files matched the new build by SHA-256. |
 
 ## What the product delivers
 
@@ -29,7 +31,7 @@ The requirements and design describe the shipped Swedish-to-Arabic workflow and 
 
 ## Video and media
 
-The previous 78-second cut had approximately eight seconds of opening silence, an internal gap near twelve seconds, and a closing silent stretch over sixteen seconds. The replacement is 76.38 seconds and adds synthesized English narration, keeps the Swedish and Arabic demonstration audible, and removes the long waits. A full decode and FFmpeg silence scan of the revised file found a longest quiet interval of 1.43 seconds at the test threshold of −45 dB. The input material for the live segment is the recorded production session described above. The film labels the no-voice test and shows what the repository contains. The submission section below records Kiro execution as pending.
+The previous 78-second cut had approximately eight seconds of opening silence, an internal gap near twelve seconds, and a closing silent stretch over sixteen seconds. The narrated review cut removed the long waits, added English narration, and kept the Swedish and Arabic demonstration audible. The subsequent cut replaces its closing chapter with a description of the actual Kiro work. The input material for the live segment is the recorded production session described above. The film labels the no-voice test as simulated.
 
 The original workshop script and visuals are project material. Source references for the packaged and alternate voices appear in the [README](README.md). [Piper NST](https://huggingface.co/rhasspy/piper-voices/blob/main/sv/sv_SE/nst/medium/MODEL_CARD) lists CC0 training data. The [Nabra INT8 model](https://huggingface.co/marwanelamami/nabra-82m-sherpa-onnx/tree/7fe12ea) lists Apache-2.0. English narration uses [Piper LJSpeech](https://huggingface.co/rhasspy/piper-voices/blob/main/en/en_US/ljspeech/medium/MODEL_CARD), whose card identifies public-domain training data. Repository MIT licensing covers project code. The voice-model metadata was checked separately. Public-use rights for the recorded Microsoft Naayf output remain to be confirmed by the entrant before final contest submission.
 
@@ -37,7 +39,7 @@ The original workshop script and visuals are project material. Source references
 
 The public source, MIT license, root Kiro files, live site, and downloadable video are available. The [submission materials](SUBMISSION.md) include draft fields and the reproducible testing instructions.
 
-Kiro opened the local project and displayed **Sign in** during this audit. The repo contains requirements, design, steering, tasks, and a proposed save hook. Actual Kiro-assisted development and hook execution still need evidence. The entrant can sign in directly in Kiro, after which a genuine improvement can be assigned and checked through the spec and hook. Candidate tasks are reproducing the language-model setup timeout on a fresh Chrome profile and adding clear status and retry behavior wherever the failure can be reproduced. Record the agent's work, actual tests, and date, then revise the engineering scene. A public YouTube URL and a submitted Devpost entry remain outstanding. The verified deadline is **December 4, 2026 at 23:00 in Sweden**.
+The initial audit found a signed-out desktop session. In the follow-up, the entrant authorized Kiro CLI and Kiro implemented [two live reliability improvements](KIRO.md). Confirm the recorded media rights before final publication. A public YouTube URL and a submitted Devpost entry remain outstanding. The verified deadline is **December 4, 2026 at 23:00 in Sweden**.
 
 The [official rules](https://kiroween.devpost.com/rules) screen theme fit and meaningful Kiro use before scoring. The five scored criteria are impact, technological implementation, design, innovation, and presentation, at 20% each. The November 20 public repository date is within the submission window. The entrant must still confirm project provenance, any incorporated pre-existing work, team eligibility, and media permissions. A numeric score for the demo cannot establish eligibility.
 

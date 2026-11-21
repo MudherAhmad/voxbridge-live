@@ -178,7 +178,8 @@ export function Studio() {
     setMode('opening');
     setStatus('Choose a browser tab and enable Share tab audio.');
     try {
-      audio = await openTabCapture(request.signal, controls.current.original / 100);
+      const captureOriginal = controls.current.original || defaultMix.original;
+      audio = await openTabCapture(request.signal, captureOriginal / 100);
       const { analyser, stream } = audio;
       const samples = new Uint8Array(analyser.fftSize);
       const start = performance.now();
@@ -191,7 +192,12 @@ export function Studio() {
       }
       capturedAudio.current = audio;
       setCanDuck(audio.canDuck);
-      audio.setGain(controls.current.original / 100);
+      if (controls.current.original === 0) {
+        const restored = { ...controls.current, original: captureOriginal };
+        controls.current = restored;
+        setMixSettings(restored);
+      }
+      audio.setGain(captureOriginal / 100);
       setMode('capture');
       setStatus(nativeLiveAvailable
         ? 'Enable live dubbing to send tab audio to the browser speech recognition service, which may process audio online.'

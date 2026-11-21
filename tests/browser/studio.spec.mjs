@@ -376,3 +376,111 @@ test('iPhone shows the desktop-only capture instruction and keeps sample playbac
     await expect(page.locator('.state')).toHaveText('Playing sample');
   } finally { await page.close(); }
 });
+
+test('translation rejection keeps the previous caption and recovers without restarting recognition', async ({ page }) => {
+  await page.addInitScript(() => {
+    navigator.mediaDevices.getDisplayMedia = async () => {
+      const context = new AudioContext();
+      const stream = context.createMediaStreamDestination().stream;
+      window.testTrack = stream.getAudioTracks()[0];
+      Object.defineProperty(window.testTrack, 'getSettings', { value: () => ({ suppressLocalAudioPlayback: true }) });
+      return stream;
+    };
+    window.recognitionStarts = 0;
+    Object.defineProperty(window, 'Translator', { value: {
+      async create() {
+        return {
+          async translate(text) {
+            if (text === 'Misslyckad fras') throw new Error('Simulated translation failure');
+            if (text === 'Första meningen') return 'الجملة الأولى';
+            return 'أمر العمل';
+          },
+          destroy() {},
+        };
+      },
+    } });
+    const Recognition = class {
+      start(track) {
+        window.recognizer = this;
+        window.recognitionStarts++;
+        window.usedSharedTrack = track === window.testTrack;
+      }
+      abort() { window.recognitionAborted = true; }
+    };
+    Object.defineProperty(window, 'SpeechRecognition', { value: Recognition });
+  });
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Capture tab audio' }).click();
+  await expect(page.locator('.status')).toContainText('may process audio online');
+  await page.locator('.lane.dub').getByRole('button', { name: 'Enable live dubbing' }).click();
+  await expect(page.locator('.status')).toContainText('Listening to the shared tab');
+  await page.getByRole('checkbox', { name: 'Arabic voice' }).uncheck();
+
+  const finalize = transcript => page.evaluate(text => window.recognizer.onresult({
+    resultIndex: 0, results: [{ isFinal: true, 0: { transcript: text } }],
+  }), transcript);
+  const translation = page.locator('p[lang="ar"]');
+  await finalize('Första meningen');
+  await expect(translation).toHaveText('الجملة الأولى');
+  await finalize('Misslyckad fras');
+  await expect(page.locator('.status')).toContainText('could not be translated');
+  await expect(translation).toHaveText('الجملة الأولى');
+  await finalize('Arbetsordern');
+  await expect(translation).toHaveText('أمر العمل');
+  await expect(page.locator('.status')).toContainText('Listening to the shared tab');
+  expect(await page.evaluate(() => ({
+    starts: window.recognitionStarts,
+    aborted: Boolean(window.recognitionAborted),
+    usedSharedTrack: window.usedSharedTrack,
+  }))).toEqual({ starts: 1, aborted: false, usedSharedTrack: true });
+  await page.getByRole('button', { name: 'Stop capture' }).click();
+});
+
+test('Arabic-only sample mix restores original gain on capture', async ({ page }) => {
+  await page.addInitScript(() => {
+    window.captureGainValues = [];
+    const createGain = AudioContext.prototype.createGain;
+    AudioContext.prototype.createGain = function () {
+      const node = createGain.call(this);
+      const setTarget = node.gain.setTargetAtTime.bind(node.gain);
+      node.gain.setTargetAtTime = (value, time, constant) => {
+        window.captureGainValues.push(value);
+        return setTarget(value, time, constant);
+      };
+      return node;
+    };
+    let firstRequest = true;
+    navigator.mediaDevices.getDisplayMedia = async () => {
+      if (firstRequest) {
+        firstRequest = false;
+        throw new DOMException('Simulated dismissal', 'NotAllowedError');
+      }
+      const context = new AudioContext();
+      const stream = context.createMediaStreamDestination().stream;
+      window.testTrack = stream.getAudioTracks()[0];
+      Object.defineProperty(window.testTrack, 'getSettings', { value: () => ({ suppressLocalAudioPlayback: true }) });
+      return stream;
+    };
+  });
+  await page.goto('/');
+
+  await page.getByRole('button', { name: 'Play workshop sample' }).click();
+  await expect(page.locator('.state')).toHaveText('Playing sample');
+  await page.getByRole('button', { name: 'Arabic only' }).click();
+  await expect(page.locator('.mix-level strong')).toHaveText('0%');
+  await page.getByRole('button', { name: 'Pause sample' }).click();
+
+  const capture = page.getByRole('button', { name: 'Capture tab audio' });
+  await capture.click();
+  await expect(page.locator('.status')).toContainText('cancelled or declined');
+  await expect(page.locator('.mix-level strong')).toHaveText('0%');
+
+  await page.evaluate(() => { window.captureGainValues.length = 0; });
+  await capture.click();
+  await expect(page.locator('.state')).toHaveText('Receiving audio');
+  await expect(page.locator('.mix-level strong')).toHaveText('40%');
+  const captureGains = await page.evaluate(() => window.captureGainValues);
+  expect(captureGains.some(v => Math.abs(v - 0.4) < 0.001)).toBe(true);
+  expect(captureGains.every(v => v > 0)).toBe(true);
+  await page.getByRole('button', { name: 'Stop capture' }).click();
+});
