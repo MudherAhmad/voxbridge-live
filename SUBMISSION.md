@@ -10,9 +10,9 @@
 
 ### Project description
 
-VoxBridge Live helps an Arabic-speaking technician follow a Swedish morning briefing. Hear the original, follow the Arabic captions and dub, and check terms such as *arbetsordern* and *أمر العمل*.
+**Try the workshop briefing.** Open [VoxBridge Live](https://voxbridge-live.vercel.app/) and select **Play workshop sample**. It works on desktop and mobile with no account or API key.
 
-**Try it in one click.** Open [VoxBridge Live](https://voxbridge-live.vercel.app/) and select **Play workshop sample**. The sample works on desktop and mobile with no account or API key. Then try the live path on desktop Chrome by sharing the [Swedish workshop clip](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final/Workshop-Briefing-SV.mp4) with tab audio and selecting **Enable live dubbing**.
+VoxBridge Live helps an Arabic-speaking technician follow a Swedish morning briefing. Hear the original, follow the Arabic captions and dub, and check terms such as *arbetsordern* and *أمر العمل*. To go live, share the [Swedish workshop clip](https://github.com/MudherAhmad/voxbridge-live/releases/download/kiroween-final/Workshop-Briefing-SV.mp4) with tab audio in desktop Chrome and select **Enable live dubbing**.
 
 **In the sample**, each Swedish sentence finishes before its Arabic counterpart starts. Compare listening modes, set each language's speed independently, switch playback styles, or pause and resume on one playhead. The glossary highlights the current cue.
 
@@ -42,6 +42,8 @@ VoxBridge Live — Kiroween 2026 Submission Demo (Swedish → Arabic Workshop Br
 
 ### YouTube description
 
+Try the workshop briefing at https://voxbridge-live.vercel.app/ and select Play workshop sample. No account or API key is needed.
+
 A practical walkthrough of VoxBridge Live, built for a Swedish-speaking workshop briefing where an Arabic-speaking technician needs clear instructions, synchronized captions/dubbing, and quick bilingual workshop terms.
 
 What’s shown in this demo:
@@ -55,7 +57,6 @@ What’s shown in this demo:
 
 Transparency note: Live capture and translation UI sequences are from recorded browser runs; the Arabic dubbing soundtrack in this film was regenerated with Nabra for clear presentation.
 
-- Try the app: https://voxbridge-live.vercel.app/
 - GitHub repository: https://github.com/MudherAhmad/voxbridge-live
 - Kiro log: https://github.com/MudherAhmad/voxbridge-live/blob/main/KIRO.md
 - Contest report: https://github.com/MudherAhmad/voxbridge-live/blob/main/CONTEST.md
