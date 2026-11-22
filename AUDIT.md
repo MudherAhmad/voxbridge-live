@@ -41,7 +41,7 @@ The workshop script, recordings and visuals were created for this project. The S
 
 The public source, MIT license, root Kiro files, live site, and downloadable video are available. The [submission materials](SUBMISSION.md) include draft fields and the reproducible testing instructions.
 
-The entrant authorized Kiro CLI, and Kiro implemented [two live reliability improvements and the workshop glossary](KIRO.md). The [contest review](CONTEST.md) provides the rules checklist and the sources behind the positioning. A public YouTube URL and submitted Devpost entry remain outstanding. The verified deadline is **December 4, 2026 at 23:00 in Sweden**.
+The entrant authorized Kiro CLI, and Kiro implemented [two live reliability improvements and the workshop glossary](KIRO.md). The [contest review](CONTEST.md) provides the rules checklist and the sources behind the positioning. The [YouTube demo](https://youtu.be/l0ngeda9I2E) is published. The Devpost submission receipt is pending. The verified deadline is **December 4, 2026 at 23:00 in Sweden**.
 
 The [official rules](https://kiroween.devpost.com/rules) screen theme fit and meaningful Kiro use before scoring. The five scored criteria are impact, technological implementation, design, innovation, and presentation, at 20% each. The November 20 public repository date is within the submission window. The entrant must still confirm project provenance, any incorporated pre-existing work, team eligibility, and media permissions. A numeric score for the demo cannot establish eligibility.
 
