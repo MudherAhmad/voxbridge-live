@@ -70,6 +70,6 @@ Transparency note: Live capture and translation UI sequences are from recorded b
 - A separate Edge profile on the same Windows computer played the packaged Arabic track, paused, resumed, and acquired tab audio. Its translation model timed out during setup. The supported live release target is desktop Chrome.
 - The no-voice test supplies a controlled bilingual phrase through the studio, verifies the visible recovery instruction, retains captions, disables **Arabic only**, and checks that the original audio stays at its set level.
 - The [independent review](AUDIT.md) records the source, media, test results, and remaining eligibility checks.
-- The submission film replaces the earlier system-voice soundtrack with documented Nabra-82M INT8 synthesis. The demo is published on [YouTube](https://youtu.be/l0ngeda9I2E). The Devpost submission receipt is pending. The deadline is **December 4, 2026 at 23:00 Sweden time**. The entrant or team representative confirms the entry details and declarations.
+- The submission film replaces the earlier system-voice soundtrack with documented Nabra-82M INT8 synthesis. The demo is published on [YouTube](https://youtu.be/l0ngeda9I2E). Devpost confirmed the [Kiroween 2026 submission](https://devpost.com/software/voxbridge-live) on November 22, 2026. The deadline is **December 4, 2026 at 23:00 Sweden time**. The entrant or team representative confirms the entry details and declarations.
 
 [Official Kiroween rules](https://kiroween.devpost.com/rules)
